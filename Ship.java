@@ -5,17 +5,31 @@ import java.lang.*;
 
 
 class Ship {
-    String name;
     Boolean isHorizontal;
-    
+    Boolean isSunk;
+    int [] firstPosition = new int[2];
     List <Square> ship;
 
+
+    public Ship(int length, Boolean isUser) {
+        setHorizontal();
+        setFirstPosition();
+        setShip(length);
+        this.isSunk = false;
+    }
+
+
     public Ship(int length) {
-        this.ship = setShip(length);
+        setRandomHorizontal();
+        setRandomFirstPosition();
+        setShip(length);
+        this.isSunk = false;
     }
 
     public List <Square> setShip(int length) {
         List <Square> ship = new ArrayList<>();
+
+
         for (int i = 0; i < length; i++) {
             Scanner reader = new Scanner(System.in);
             System.out.println("X: ");

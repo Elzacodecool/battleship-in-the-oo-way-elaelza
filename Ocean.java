@@ -8,9 +8,9 @@ class Ocean {
     List <Ship> ships = new ArrayList<> ();
     Square [][] ocean;
 
-    public Ocean () {
+    public Ocean (Boolean isUser) {
         this.ocean = setOcean();
-        setShips();
+        setShips(isUser);
     }
 
 
@@ -26,14 +26,19 @@ class Ocean {
     }
 
 
-    public void setShips() {
+    public void setShips(Boolean isUser) {
         Ship newShip;
         Map <String, Integer> shipsLength = getShipsLength();
 
         for(String name: shipsLength.keySet()){
             do  {
                 System.out.printf("Enter data of %s: ", name);
-                newShip = new Ship(shipsLength.get(name));
+                if(isUser) {
+                    newShip = new Ship(shipsLength.get(name), isUser);
+                }
+                else {
+                    newShip = new Ship(shipsLength.get(name));
+                }
             } while (!isPossibleShip(newShip));
 
             ships.add(newShip);
@@ -92,7 +97,7 @@ class Ocean {
 
 
     public static void main(String args[]){
-        Ocean myOcean = new Ocean();
+        Ocean myOcean = new Ocean(true);
         
         myOcean.display();
     }

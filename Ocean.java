@@ -5,50 +5,70 @@ import java.lang.*;
 
 
 class Ocean {
-    List <Ship> positions = new ArrayList<> ();
+    List <Ship> ships = new ArrayList<> ();
     Square [][] ocean;
 
     public Ocean () {
-        this.positions = setPositions();
         this.ocean = setOcean();
+        setShips();
+        setShips();
     }
 
 
-    public void setPositions() {
+    public void setShips() {
+        Ship newShip;
+        do  {
+            newShip = new Ship(3);
+        } while (!isPossibleShip(newShip));
         
-        Ship ship = new Ship(i);
-        ....
-        
-        positions.add(ship);
-        
+        ships.add(newShip);
+        addShipToOcean(newShip);
+
     }
 
 
-    public String [][] setOcean(){
-        String [][] ocean = new String[10][10];
+    public Boolean isPossibleShip(Ship myShip) {
+        for (Ship ship: ships) {
+            for (Square position: ship.ship) {
+                for (Square myPosition: myShip.ship){
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            if (myPosition.x + i == position.x && myPosition.y + j == position.y) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+
+    public Square [][] setOcean(){
+        Square [][] ocean = new Square[10][10];
 
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
-                ocean[x][y] = " ";
+                ocean[x][y] = new Square(x, y);
             }
         }
         return ocean;
     }
 
 
-    public void addShips(){
-        for (Ship myShip: positions) {
-            for (Square square: myShip.ship) {
-                ocean[square.x][square.y] = "x";
-            }
+    public void addShipToOcean(Ship myShip){
+        for (Square square: myShip.ship) {
+            ocean[square.x][square.y].setX();
         }
     }
 
 
     public void display() {
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
-                System.out.print(ocean[x][y]);
+        for (int y = 9; y >= 0; y--) {
+            for (int x = 0; x < 10; x++) {
+                System.out.print(ocean[x][y].getSign());
             }
             System.out.print("\n");
         }
@@ -57,8 +77,7 @@ class Ocean {
 
     public static void main(String args[]){
         Ocean myOcean = new Ocean();
-        myOcean.addShips();
-        System.out.println(myOcean.ocean);
+        
         myOcean.display();
     }
 }

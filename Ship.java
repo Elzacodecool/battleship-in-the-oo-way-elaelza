@@ -88,18 +88,18 @@ class Ship {
     }
 
 
-    public List <Square> setShip(int length) {
-        List <Square> ship = new ArrayList<>();
-
-
+    public void setShip(int length) {
+        Square position;
         for (int i = 0; i < length; i++) {
             
-            
-            Square position = new Square(x, y);
+            if (isHorizontal) {
+                position = new Square(firstPosition[0] + i, firstPosition[1]);
+            }
+            else {
+                position = new Square(firstPosition[0], firstPosition[1] + i);
+            }
             ship.add(position);
         }
-
-        return ship;
     }
 
 }

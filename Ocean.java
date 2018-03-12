@@ -87,9 +87,11 @@ class Ocean {
 
 
     public void display() {
-        for (int y = 9; y >= 0; y--) {
+        System.out.print("  x 0 1 2 3 4 5 6 7 8 9\ny  ____________________\n");
+        for (int y = 0; y < 10; y++) {
+            System.out.printf("%d |", y);
             for (int x = 0; x < 10; x++) {
-                System.out.print(ocean[x][y].getSign());
+                System.out.printf(" %s", ocean[x][y].getSign());
             }
             System.out.print("\n");
         }

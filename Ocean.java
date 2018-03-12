@@ -15,6 +15,18 @@ class Ocean {
     }
 
 
+    public Map <String, int> getShipsLength() {
+        Map <String, int> shipsLength = new HashMap<>();
+        shipsLength.set("Carrier", 5);
+        shipsLength.set("Battleship", 4);
+        shipsLength.set("Cruiser", 3);
+        shipsLength.set("Submarine", 3);
+        shipsLength.set("Destroyer", 2);
+
+        return shipsLength;
+    }
+
+
     public void setShips() {
         Ship newShip;
         do  {

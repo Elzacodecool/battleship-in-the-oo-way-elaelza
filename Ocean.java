@@ -11,17 +11,16 @@ class Ocean {
     public Ocean () {
         this.ocean = setOcean();
         setShips();
-        setShips();
     }
 
 
-    public Map <String, int> getShipsLength() {
-        Map <String, int> shipsLength = new HashMap<>();
-        shipsLength.set("Carrier", 5);
-        shipsLength.set("Battleship", 4);
-        shipsLength.set("Cruiser", 3);
-        shipsLength.set("Submarine", 3);
-        shipsLength.set("Destroyer", 2);
+    public Map <String, Integer> getShipsLength() {
+        Map <String, Integer> shipsLength = new HashMap<>();
+        shipsLength.put("Carrier", 5);
+        shipsLength.put("Battleship", 4);
+        shipsLength.put("Cruiser", 3);
+        shipsLength.put("Submarine", 3);
+        shipsLength.put("Destroyer", 2);
 
         return shipsLength;
     }
@@ -29,12 +28,17 @@ class Ocean {
 
     public void setShips() {
         Ship newShip;
-        do  {
-            newShip = new Ship(3);
-        } while (!isPossibleShip(newShip));
-        
-        ships.add(newShip);
-        addShipToOcean(newShip);
+        Map <String, Integer> shipsLength = getShipsLength();
+
+        for(String name: shipsLength.keySet()){
+            do  {
+                System.out.printf("Enter data of %s: ", name);
+                newShip = new Ship(shipsLength.get(name));
+            } while (!isPossibleShip(newShip));
+
+            ships.add(newShip);
+            addShipToOcean(newShip);
+        }       
 
     }
 

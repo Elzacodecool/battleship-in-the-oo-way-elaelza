@@ -26,6 +26,25 @@ class Ship {
         this.isSunk = false;
     }
 
+
+    private void setHorizontal() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Is horizontal? (y/n): ");
+        String answer = reader.next().toUpperCase();
+
+        if (answer.equals("Y")) {
+            this.isHorizontal = true;
+        }  else {
+            this.isHorizontal = false;
+        }
+    }
+
+
+    private void setRandomHorizontal() {
+        this.isHorizontal = nextBoolean();
+    }
+
+
     public List <Square> setShip(int length) {
         List <Square> ship = new ArrayList<>();
 

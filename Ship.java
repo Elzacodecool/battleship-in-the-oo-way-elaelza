@@ -44,7 +44,8 @@ class Ship {
 
 
     private void setRandomHorizontal() {
-        this.isHorizontal = nextBoolean();
+        Random random = new Random();
+        this.isHorizontal = random.nextBoolean();
     }
 
 
@@ -56,13 +57,13 @@ class Ship {
         do {
             System.out.println("X: ");
             x = reader.nextInt();
-        } while ((isHorizontal && x + length < 10) || (!isHorizontal && x < 10));
+        } while ((isHorizontal && x + length >= 10) || (!isHorizontal && x >= 10));
         
         do {
             System.out.println("Y: ");
             y = reader.nextInt();
             
-        } while ((!isHorizontal && y + length < 10) || (isHorizontal && y < 10));
+        } while ((!isHorizontal && y + length >= 10) || (isHorizontal && y >= 10));
 
         this.firstPosition[0] = x;
         this.firstPosition[1] = y;
@@ -70,16 +71,17 @@ class Ship {
 
 
     private void setRandomFirstPosition() {
+        Random random = new Random();
         int x;
         int y;
 
         do {
-            x = nextInt(10);
+            x = random.nextInt(10);
         } while ((isHorizontal && x + length < 10) || (!isHorizontal && x < 10));
         
         do {
             
-            y = nextInt(10);
+            y = random.nextInt(10);
             
         } while ((!isHorizontal && y + length < 10) || (isHorizontal && y < 10));
 

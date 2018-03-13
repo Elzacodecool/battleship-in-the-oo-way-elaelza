@@ -29,47 +29,6 @@ class Ocean {
     }
 
 
-    public void setShips(Boolean isUser) {
-        Ship newShip;
-        Map <String, Integer> shipsLength = getShipsLength();
-
-        for(String name: shipsLength.keySet()){
-            do  {
-                System.out.printf("Enter data of %s: ", name);
-                if(isUser) {
-                    newShip = new Ship(shipsLength.get(name), isUser);
-                }
-                else {
-                    newShip = new Ship(shipsLength.get(name));
-                }
-            } while (!isPossibleShip(newShip));
-
-            ships.add(newShip);
-            addShipToOcean(newShip);
-        }       
-
-    }
-
-
-    public Boolean isPossibleShip(Ship myShip) {
-        for (Ship ship: ships) {
-            for (Square position: ship.ship) {
-                for (Square myPosition: myShip.ship){
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if (myPosition.x + i == position.x && myPosition.y + j == position.y) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-
-
     public Square [][] setBoard(){
         Square [][] board = new Square[10][10];
 

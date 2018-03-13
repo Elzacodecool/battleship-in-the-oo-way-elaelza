@@ -18,6 +18,18 @@ class Ship {
     }  
     
 
+    public static Map <String, Integer> getShipsLength() {
+        Map <String, Integer> shipsLength = new HashMap<>();
+        shipsLength.put("Carrier", 5);
+        shipsLength.put("Battleship", 4);
+        shipsLength.put("Cruiser", 3);
+        shipsLength.put("Submarine", 3);
+        shipsLength.put("Destroyer", 2);
+
+        return shipsLength;
+    }
+    
+
     public void sunkShip(){
         this.isSunk = true;
     }

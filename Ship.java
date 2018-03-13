@@ -23,8 +23,7 @@ class Ship {
     }
 
 
-
-    public void setShip(Integer length, Integer x, Integer y) {
+    private void setShip(Integer length, Integer x, Integer y) {
         Square position;
 
         for (int i = 0; i < length; i++) {

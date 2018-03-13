@@ -63,12 +63,12 @@ class Game {
             if (x + length < 10 && y < 10){
                 return true;
             }
-        }
-        else {
+        } else {
             if (x < 10 && y  + length < 10){
                 return true;
             }
         }
+        System.out.println("Board is too small for this ship.");
         return false;
     }
 
@@ -80,6 +80,7 @@ class Game {
                     for (int i = -1; i <= 1; i++) {
                         for (int j = -1; j <= 1; j++) {
                             if (newPosition.x + i == position.x && newPosition.y + j == position.y) {
+                                System.out.println("There's no space for this ship.");
                                 return false;
                             }
                         }
@@ -104,16 +105,38 @@ class Game {
 
 
     private void playGame(){
-        // game player - computer:
-
         Ocean ocean1 = new Ocean();
-        setShips(ocean1, true);
+        Ocean ocean2 = new Ocean();
+        switch (mode) {
+            case "1":
+                setShips(ocean1, false);
+                setShips(ocean2, false);
+            break;
+            case "2":
+                setShips(ocean1, false);
+                setShips(ocean2, true);
+            break;
+            case "3":
+                setShips(ocean1, true);
+                setShips(ocean2, true);
+            break;
+            default:
+                System.out.println("There's no such option");
+        }
+
         ocean1.addShipsToBoard();
         ocean1.display();
-        Ocean ocean2 = new Ocean();
-        setShips(ocean2, true);
         ocean2.addShipsToBoard();
         ocean2.display();
+
+        // Ocean ocean1 = new Ocean();
+        // setShips(ocean1, true);
+        // ocean1.addShipsToBoard();
+        // ocean1.display();
+        // Ocean ocean2 = new Ocean();
+        // setShips(ocean2, true);
+        // ocean2.addShipsToBoard();
+        // ocean2.display();
 
     }
 

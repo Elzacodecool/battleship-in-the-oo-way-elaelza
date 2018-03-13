@@ -28,7 +28,7 @@ class Ship {
             }
         }
     
-        
+    }  
     int length;
     Boolean isHorizontal;
     Boolean isSunk;

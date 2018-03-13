@@ -53,7 +53,7 @@ class Game {
                 newShip = new Ship(length, isHorizontal, x, y);
             } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ocean.ships, newShip));
             
-            ocean.setShip(isHorizontal, x, y, length);
+            ocean.ships.add(newShip);
         }       
 
     }

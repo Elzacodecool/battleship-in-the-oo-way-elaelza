@@ -28,10 +28,10 @@ class Ocean {
     }
 
 
-    public void setShip(Boolean isHorizontal, Integer x, Integer y, Integer length) {
-        Ship newShip = new Ship(length, isHorizontal, x, y);
-        this.ships.add(newShip);
-    }
+    // public void setShip(Boolean isHorizontal, Integer x, Integer y, Integer length) {
+    //     Ship newShip = new Ship(length, isHorizontal, x, y);
+    //     this.ships.add(newShip);
+    // }
 
 
     public void addShipsToBoard(){

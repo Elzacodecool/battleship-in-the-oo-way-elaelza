@@ -46,48 +46,6 @@ class Game {
         return true;
     }
 
-
-
-    private void setFirstPosition() {
-        Scanner reader = new Scanner(System.in);
-        int x;
-        int y;
-            
-        do {
-            System.out.println("X: ");
-            x = reader.nextInt();
-        } while ((isHorizontal && x + length >= 10) || (!isHorizontal && x >= 10));
-        
-        do {
-            System.out.println("Y: ");
-            y = reader.nextInt();
-            
-        } while ((!isHorizontal && y + length >= 10) || (isHorizontal && y >= 10));
-
-        this.firstPosition[0] = x;
-        this.firstPosition[1] = y;
-    }
-
-
-    private void setRandomFirstPosition() {
-        Random random = new Random();
-        int x;
-        int y;
-
-        do {
-            x = random.nextInt(10);
-        } while ((isHorizontal && x + length < 10) || (!isHorizontal && x < 10));
-        
-        do {
-            
-            y = random.nextInt(10);
-            
-        } while ((!isHorizontal && y + length < 10) || (isHorizontal && y < 10));
-
-        this.firstPosition[0] = x;
-        this.firstPosition[1] = y;
-    }
-
     
     private void printSubmenu() {
         String [] mainMenu = { "1. Beginner",

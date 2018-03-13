@@ -16,25 +16,15 @@ class Game {
         }
     }
 
-<<<<<<< HEAD
 
-    public void setShips(Boolean isUser) {
-        Ship newShip;
-        Map <String, Integer> shipsLength = getShipsLength();
+    public void setShips() {
+        
+        Map <String, Integer> shipsLength = Ship.getShipsLength();
 
         for(String name: shipsLength.keySet()){
-            do  {
-                System.out.printf("Enter data of %s: ", name);
-                if(isUser) {
-                    newShip = new Ship(shipsLength.get(name), isUser);
-                }
-                else {
-                    newShip = new Ship(shipsLength.get(name));
-                }
-            } while (!isPossibleShip(newShip));
-
-            ships.add(newShip);
-            addShipToOcean(newShip);
+            ...
+            newShip = new Ship(shipsLength.get(name), isUser);
+            
         }       
 
     }
@@ -56,23 +46,6 @@ class Game {
         return true;
     }
 
-    private void setHorizontal() {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Is horizontal? (y/n): ");
-        String answer = reader.next().toUpperCase();
-
-        if (answer.equals("Y")) {
-            this.isHorizontal = true;
-        }  else {
-            this.isHorizontal = false;
-        }
-    }
-
-
-    private void setRandomHorizontal() {
-        Random random = new Random();
-        this.isHorizontal = random.nextBoolean();
-    }
 
 
     private void setFirstPosition() {
@@ -116,7 +89,6 @@ class Game {
     }
 
     
-=======
     private void printSubmenu() {
         String [] mainMenu = { "1. Beginner",
                             "2. Advanced", 
@@ -127,7 +99,6 @@ class Game {
             System.out.println(e);
         }
     }
->>>>>>> 7ff71a067ffcaa06ed1146c83edc1b029f90ec2b
     public static void main (String [] args) {
         Game myGame = new Game();
         String mode;

@@ -49,4 +49,14 @@ class Ship {
             this.squares.add(position);
         }
     }
+
+    public Boolean getShot(Integer x, Integer y) {
+        for (Square element : squares) {
+            Boolean shotSquare = element.getShot(x, y, "X");
+            if (shotSquare) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

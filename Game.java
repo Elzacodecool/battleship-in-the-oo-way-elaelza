@@ -7,6 +7,9 @@ import java.lang.*;
 class Game {
     String mode;
     String level;
+    View view = new View();
+    Ocean ocean1 = new Ocean();
+    Ocean ocean2 = new Ocean();
 
 
     private String askUser(String question) {
@@ -35,7 +38,7 @@ class Game {
         Integer y;
         Ship newShip;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
-        View view = new View();
+        
 
         for(String name: shipsLength.keySet()){
             length = shipsLength.get(name);
@@ -105,8 +108,7 @@ class Game {
 
 
     private void startGame() {
-        Ocean ocean1 = new Ocean();
-        Ocean ocean2 = new Ocean();
+
         switch (mode) {
             case "1":
                 setShips(ocean1, false);
@@ -141,14 +143,68 @@ class Game {
     }
 
     private void playGame() {
-        String name = myGame.askUser("What's your name?")
+        String name = this.askUser("What's your name?");
         HighScore score = new HighScore(name);
+        Boolean isComputer1 = null;
+        Boolean isComputer2 = null;
+
+        switch (mode) {
+            case "1":
+                isComputer1 = false;
+                isComputer2 = false;
+            break;
+            case "2":
+                isComputer1 = false;
+                isComputer2 = true;
+            break;
+            case "3":
+                isComputer1 = true;
+                isComputer2 = true;
+            break;
+            default:
+                System.out.println("There's no such option");
+        }
+
         do {
+            Boolean shotBomb = this.getShot(ocean1, isComputer1);
+            ocean1.display();
+            if (shotBomb) {
+                System.out.println("You have shot a bomb. Game over!");
+                break;
+            }
+            
+            shotBomb = this.getShot(ocean2, isComputer2);
+            ocean2.display();
+            if (shotBomb) {
+                System.out.println("You have shot a bomb. Game over!");
+                break;
+            }
 
-
-        } while(!mygame.isWon());
+        } while (!this.isWon());
         score.writeToFile();
+    }
 
+    public Boolean isWon () {
+        return true; //TODO
+    }
+
+    private Boolean getShot(Ocean ocean, Boolean isComputer) {
+        List<Integer> position = null;
+        Integer x;
+        Integer y;
+        if (isComputer) {
+            if (this.level.equals("1")) {
+                position = view.getRandomPosition();
+            } //else {
+                // TODO aiming
+           // }
+        } else {
+            position = view.getPosition();
+        }
+        x = position.get(0);
+        y = position.get(1);
+
+        return ocean.getShot(x, y);
     }
 
 
@@ -162,9 +218,8 @@ class Game {
             myGame.printSubmenu();
             myGame.level = myGame.askUser("How would you like to play??");
             myGame.startGame();
+            myGame.playGame();
         } while (!myGame.level.equals("4"));
-
-        
 
     }
 }

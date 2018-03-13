@@ -33,6 +33,7 @@ class Game {
         Integer length;
         Integer x;
         Integer y;
+        Ship newShip;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
         View view = new View();
 
@@ -49,7 +50,8 @@ class Game {
                 }
                 x = position.get(0);
                 y = position.get(1);
-            } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ocean.ships, x,y));
+                newShip = new Ship(length, isHorizontal, x, y);
+            } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ocean.ships, newShip));
             
             ocean.setShip(isHorizontal, x, y, length);
         }       
@@ -71,18 +73,18 @@ class Game {
     }
 
 
-    public Boolean isPossibleShip(List <Ship> ships, Integer x, Integer y) {
+    public Boolean isPossibleShip(List <Ship> ships, Ship newShip) {
         for (Ship ship: ships) {
             for (Square position: ship.squares) {
-               
+                for (Square newPosition: newShip.squares){
                     for (int i = -1; i <= 1; i++) {
                         for (int j = -1; j <= 1; j++) {
-                            if (x + i == position.x && y + j == position.y) {
+                            if (newPosition.x + i == position.x && newPosition.y + j == position.y) {
                                 return false;
                             }
                         }
                     }
-                
+                }
             }
         }
         return true;
@@ -102,7 +104,17 @@ class Game {
 
 
     private void playGame(){
-        
+        // game player - computer:
+
+        Ocean ocean1 = new Ocean();
+        setShips(ocean1, true);
+        ocean1.addShipsToBoard();
+        ocean1.display();
+        Ocean ocean2 = new Ocean();
+        setShips(ocean2, true);
+        ocean2.addShipsToBoard();
+        ocean2.display();
+
     }
 
 

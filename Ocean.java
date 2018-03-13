@@ -34,11 +34,14 @@ class Ocean {
     }
 
 
-    // public void addShipToBoard(Ship myShip){
-    //     for (Square square: myShip.ship) {
-    //         board[square.x][square.y].setX();
-    //     }
-    // }
+    public void addShipsToBoard(){
+        for(Ship myShip: ships){
+            for (Square square: myShip.squares) {
+                board[square.x][square.y].setSign("x");
+            }
+        }
+        
+    }
 
 
     public void display() {

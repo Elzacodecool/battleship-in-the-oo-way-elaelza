@@ -104,7 +104,7 @@ class Game {
     }
 
 
-    private void playGame(){
+    private void startGame() {
         Ocean ocean1 = new Ocean();
         Ocean ocean2 = new Ocean();
         switch (mode) {
@@ -140,6 +140,17 @@ class Game {
 
     }
 
+    private void playGame() {
+        String name = myGame.askUser("What's your name?")
+        HighScore score = new HighScore(name);
+        do {
+
+
+        } while(!mygame.isWon());
+        score.writeToFile();
+
+    }
+
 
     public static void main (String [] args) {
         Game myGame = new Game();
@@ -150,7 +161,7 @@ class Game {
             myGame.mode = myGame.askUser("How would you like to play??");
             myGame.printSubmenu();
             myGame.level = myGame.askUser("How would you like to play??");
-            myGame.playGame();
+            myGame.startGame();
         } while (!myGame.level.equals("4"));
 
         

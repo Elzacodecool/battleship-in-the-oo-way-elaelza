@@ -17,13 +17,24 @@ class Game {
     }
 
 
-    public void setShips() {
-        
+    public void setShips(Ocean ocean, Boolean isComputer) {
+        Boolean isHorizontal;
+        List<Integer> position;
+        Integer length;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
 
         for(String name: shipsLength.keySet()){
-            ...
-            newShip = new Ship(shipsLength.get(name), isUser);
+            length = shipsLength.get(name);
+
+            if (isComputer) {
+                isHorizontal = view.getRandomIsHorizontal();
+                position = view.getRandomPosition();
+            }
+            else {
+                isHorizontal = view.getIsHorizontal();
+                position = view.getPosition();
+            }
+            ocean.setShip(isHorizontal, position, length);
             
         }       
 

@@ -28,20 +28,20 @@ class Ocean {
     }
 
 
-    public void setShip(Boolean isHorizontal, List<Integer> position, Integer length) {
-        Integer x = position.get(0);
-        Integer y = position.get(1);
-
-        Ship newShip = new Ship(length, isHorizontal, x, y);
-        this.ships.add(newShip);
-    }
-
-
-    // public void addShipToBoard(Ship myShip){
-    //     for (Square square: myShip.ship) {
-    //         board[square.x][square.y].setX();
-    //     }
+    // public void setShip(Boolean isHorizontal, Integer x, Integer y, Integer length) {
+    //     Ship newShip = new Ship(length, isHorizontal, x, y);
+    //     this.ships.add(newShip);
     // }
+
+
+    public void addShipsToBoard(){
+        for(Ship myShip: ships){
+            for (Square square: myShip.squares) {
+                board[square.x][square.y].setSign("x");
+            }
+        }
+        
+    }
 
 
     public void display() {

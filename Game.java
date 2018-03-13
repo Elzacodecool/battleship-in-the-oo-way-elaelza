@@ -1,4 +1,14 @@
+import java.text.*;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+
 class Game {
+    String mode;
+    String level;
+
+
     private String askUser(String question) {
         System.out.println(question);
         Scanner input = new Scanner(System.in);
@@ -11,7 +21,7 @@ class Game {
                             "3. Computer - Computer",
                             "4. Quit",
                             };
-        for (String e : menu){
+        for (String e : mainMenu){
             System.out.println(e);
         }
     }
@@ -21,7 +31,11 @@ class Game {
         Boolean isHorizontal;
         List<Integer> position;
         Integer length;
+        Integer x;
+        Integer y;
+        Ship newShip;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
+        View view = new View();
 
         for(String name: shipsLength.keySet()){
             length = shipsLength.get(name);
@@ -34,17 +48,17 @@ class Game {
                     isHorizontal = view.getIsHorizontal();
                     position = view.getPosition();
                 }
-            } while (!isPossible(isHorizontal, position, length));
+                x = position.get(0);
+                y = position.get(1);
+                newShip = new Ship(length, isHorizontal, x, y);
+            } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ocean.ships, newShip));
             
-            ocean.setShip(isHorizontal, position, length);
+            ocean.ships.add(newShip);
         }       
 
     }
 
-    private Boolean isPossible(Boolean isHorizontal, List<Integer> position, Integer length){
-        Integer x = position.get(0);
-        Integer y = position.get(1);
-
+    private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
         if (isHorizontal) {
             if (x + length < 10 && y < 10){
                 return true;
@@ -59,13 +73,13 @@ class Game {
     }
 
 
-    public Boolean isPossibleShip(Ship myShip) {
+    public Boolean isPossibleShip(List <Ship> ships, Ship newShip) {
         for (Ship ship: ships) {
-            for (Square position: ship.ship) {
-                for (Square myPosition: myShip.ship){
+            for (Square position: ship.squares) {
+                for (Square newPosition: newShip.squares){
                     for (int i = -1; i <= 1; i++) {
                         for (int j = -1; j <= 1; j++) {
-                            if (myPosition.x + i == position.x && myPosition.y + j == position.y) {
+                            if (newPosition.x + i == position.x && newPosition.y + j == position.y) {
                                 return false;
                             }
                         }
@@ -83,29 +97,40 @@ class Game {
                             "3. Madman",
                             "4. Quit",
                             };
-        for (String e : menu){
+        for (String e : mainMenu){
             System.out.println(e);
         }
     }
+
+
+    private void playGame(){
+        // game player - computer:
+
+        Ocean ocean1 = new Ocean();
+        setShips(ocean1, true);
+        ocean1.addShipsToBoard();
+        ocean1.display();
+        Ocean ocean2 = new Ocean();
+        setShips(ocean2, true);
+        ocean2.addShipsToBoard();
+        ocean2.display();
+
+    }
+
+
     public static void main (String [] args) {
         Game myGame = new Game();
+
         String mode;
         do {
             myGame.printMenu();
-            mode = myGame.askUser("How would you like to play??");
-            level = myGame.askUser("How would you like to play??");
-            switch (option) {
-                case "1":
+            myGame.mode = myGame.askUser("How would you like to play??");
+            myGame.printSubmenu();
+            myGame.level = myGame.askUser("How would you like to play??");
+            myGame.playGame();
+        } while (!myGame.level.equals("4"));
 
-                break;
-                case "2":
-                break;
-                case "3":
-                break;
-            }
-        } while (!option.equals("4"))
-
-        }
+        
 
     }
 }

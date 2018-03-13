@@ -11,7 +11,7 @@ class View {
     //public List<Integer> getFirstPosition() {
 
     //}
-    public List<Integer> getFirstPosition() {
+    public List<Integer> getPosition() {
         Scanner reader = new Scanner(System.in);
         List <Integer> position = new ArrayList<>();
                   
@@ -25,7 +25,7 @@ class View {
     }
 
 
-    public List<Integer> getRandomFirstPosition() {
+    public List<Integer> getRandomPosition() {
         Random random = new Random();
         List <Integer> position = new ArrayList<>();
                     

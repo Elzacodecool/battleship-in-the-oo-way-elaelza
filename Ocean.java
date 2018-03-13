@@ -28,10 +28,7 @@ class Ocean {
     }
 
 
-    public void setShip(Boolean isHorizontal, List<Integer> position, Integer length) {
-        Integer x = position.get(0);
-        Integer y = position.get(1);
-
+    public void setShip(Boolean isHorizontal, Integer x, Integer y, Integer length) {
         Ship newShip = new Ship(length, isHorizontal, x, y);
         this.ships.add(newShip);
     }

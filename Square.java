@@ -17,8 +17,8 @@ class Square {
     }
 
 
-    public void setX() {
-        this.sign = "x";
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 
 

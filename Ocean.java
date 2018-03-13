@@ -11,9 +11,8 @@ class Ocean {
     // String level;
 
 
-    public Ocean (Boolean isUser) {
-        this.ocean = setOcean();
-        setShips(isUser);
+    public Ocean () {
+        this.board = setBoard();
     }
 
 
@@ -41,11 +40,20 @@ class Ocean {
     }
 
 
-    public void addShipToOcean(Ship myShip){
-        for (Square square: myShip.ship) {
-            ocean[square.x][square.y].setX();
-        }
+    public void setShip(Boolean isHorizontal, List<Integer> position, Integer length) {
+        Integer x = position.get(0);
+        Integer y = position.get(1);
+
+        Ship newShip = new Ship(length, isHorizontal, x, y);
+        this.ships.add(newShip);
     }
+
+
+    // public void addShipToBoard(Ship myShip){
+    //     for (Square square: myShip.ship) {
+    //         board[square.x][square.y].setX();
+    //     }
+    // }
 
 
     public void display() {
@@ -53,7 +61,7 @@ class Ocean {
         for (int y = 0; y < 10; y++) {
             System.out.printf("%d |", y);
             for (int x = 0; x < 10; x++) {
-                System.out.printf(" %s", ocean[x][y].getSign());
+                System.out.printf(" %s", board[x][y].getSign());
             }
             System.out.print("\n");
         }
@@ -61,7 +69,7 @@ class Ocean {
 
 
     public static void main(String args[]){
-        Ocean myOcean = new Ocean(true);
+        Ocean myOcean = new Ocean();
         
         myOcean.display();
     }

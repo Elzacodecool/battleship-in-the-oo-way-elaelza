@@ -6,7 +6,10 @@ import java.lang.*;
 
 class Ocean {
     List <Ship> ships = new ArrayList<> ();
-    Square [][] ocean;
+    // List <Bomb> bombs = new ArrayList<> ();
+    Square [][] board;
+    // String level;
+
 
     public Ocean (Boolean isUser) {
         this.ocean = setOcean();
@@ -67,15 +70,15 @@ class Ocean {
 
 
 
-    public Square [][] setOcean(){
-        Square [][] ocean = new Square[10][10];
+    public Square [][] setBoard(){
+        Square [][] board = new Square[10][10];
 
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
-                ocean[x][y] = new Square(x, y);
+                board[x][y] = new Square(x, y);
             }
         }
-        return ocean;
+        return board;
     }
 
 

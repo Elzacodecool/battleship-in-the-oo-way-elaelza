@@ -5,29 +5,28 @@ import java.lang.*;
 
 
 class Ship {
-    String name;
+    Integer length;
     Boolean isHorizontal;
-    
-    List <Square> ship;
+    List <Square> squares = new ArrayList<>();
 
-    public Ship(int length) {
-        this.ship = setShip(length);
-    }
+    public Ship(Integer length, Boolean isHorizontal, int x, int y) {
+        this.length = length;
+        this.isHorizontal = isHorizontal;
 
-    public List <Square> setShip(int length) {
-        List <Square> ship = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            Scanner reader = new Scanner(System.in);
-            System.out.println("X: ");
-            int x = reader.nextInt();
-            System.out.println("Y: ");
-            int y = reader.nextInt();
-            
-            Square position = new Square(x, y);
-            ship.add(position);
+        Square position = new Square(x, y);
+        squares.add(position);
+
+        if (isHorizontal) {
+            for (int i = 1; i < length; i++) {
+                position = new Square(x + i, y);
+                squares.add(position);
+            }
+        } else {
+            for (int i = 1; i < length; i++) {
+                position = new Square(x, y + i);
+                squares.add(position);
+            }
         }
-
-        return ship;
+        
     }
-
 }

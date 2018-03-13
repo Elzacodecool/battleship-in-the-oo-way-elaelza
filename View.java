@@ -14,22 +14,12 @@ class View {
     public List<Integer> getFirstPosition() {
         Scanner reader = new Scanner(System.in);
         List <Integer> position = new ArrayList<>();
-        Integer x;
-        Integer y;
-            
-        do {
-            System.out.println("X: ");
-            x = reader.nextInt();
-        } while ((isHorizontal && x + length >= 10) || (!isHorizontal && x >= 10));
-        
-        do {
-            System.out.println("Y: ");
-            y = reader.nextInt();
-            
-        } while ((!isHorizontal && y + length >= 10) || (isHorizontal && y >= 10));
-
-        position.add(x);
-        position.add(y);
+                  
+        System.out.println("X: ");
+        position.add(reader.nextInt());
+    
+        System.out.println("Y: ");
+        position.add(reader.nextInt());
 
         return position;
     }
@@ -37,24 +27,14 @@ class View {
 
     public List<Integer> getRandomFirstPosition() {
         Random random = new Random();
-        Integer x;
-        Integer y;
-
-        do {
-            x = random.nextInt(10);
-        } while ((isHorizontal && x + length < 10) || (!isHorizontal && x < 10));
-        
-        do {
-            
-            y = random.nextInt(10);
-            
-        } while ((!isHorizontal && y + length < 10) || (isHorizontal && y < 10));
-        position.add(x);
-        position.add(y);
+        List <Integer> position = new ArrayList<>();
+                    
+        position.add(random.nextInt(10));
+        position.add(random.nextInt(10));
 
         return position;
     }
-    
+
     
     public Boolean getIsHorizontal() {
         Scanner reader = new Scanner(System.in);

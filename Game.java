@@ -25,20 +25,39 @@ class Game {
 
         for(String name: shipsLength.keySet()){
             length = shipsLength.get(name);
-
-            if (isComputer) {
-                isHorizontal = view.getRandomIsHorizontal();
-                position = view.getRandomPosition();
-            }
-            else {
-                isHorizontal = view.getIsHorizontal();
-                position = view.getPosition();
-            }
-            ocean.setShip(isHorizontal, position, length);
+            do {
+                if (isComputer) {
+                    isHorizontal = view.getRandomIsHorizontal();
+                    position = view.getRandomPosition();
+                }
+                else {
+                    isHorizontal = view.getIsHorizontal();
+                    position = view.getPosition();
+                }
+            } while (!isPossible(isHorizontal, position, length));
             
+            ocean.setShip(isHorizontal, position, length);
         }       
 
     }
+
+    private Boolean isPossible(Boolean isHorizontal, List<Integer> position, Integer length){
+        Integer x = position.get(0);
+        Integer y = position.get(1);
+
+        if (isHorizontal) {
+            if (x + length < 10 && y < 10){
+                return true;
+            }
+        }
+        else {
+            if (x < 10 && y  + length < 10){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public Boolean isPossibleShip(Ship myShip) {
         for (Ship ship: ships) {

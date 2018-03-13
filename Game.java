@@ -17,26 +17,47 @@ class Game {
     }
 
 
-    public void setShips(Boolean isUser) {
-        Ship newShip;
-        Map <String, Integer> shipsLength = getShipsLength();
+    public void setShips(Ocean ocean, Boolean isComputer) {
+        Boolean isHorizontal;
+        List<Integer> position;
+        Integer length;
+        Map <String, Integer> shipsLength = Ship.getShipsLength();
 
         for(String name: shipsLength.keySet()){
-            do  {
-                System.out.printf("Enter data of %s: ", name);
-                if(isUser) {
-                    newShip = new Ship(shipsLength.get(name), isUser);
+            length = shipsLength.get(name);
+            do {
+                if (isComputer) {
+                    isHorizontal = view.getRandomIsHorizontal();
+                    position = view.getRandomPosition();
                 }
                 else {
-                    newShip = new Ship(shipsLength.get(name));
+                    isHorizontal = view.getIsHorizontal();
+                    position = view.getPosition();
                 }
-            } while (!isPossibleShip(newShip));
-
-            ships.add(newShip);
-            addShipToOcean(newShip);
+            } while (!isPossible(isHorizontal, position, length));
+            
+            ocean.setShip(isHorizontal, position, length);
         }       
 
     }
+
+    private Boolean isPossible(Boolean isHorizontal, List<Integer> position, Integer length){
+        Integer x = position.get(0);
+        Integer y = position.get(1);
+
+        if (isHorizontal) {
+            if (x + length < 10 && y < 10){
+                return true;
+            }
+        }
+        else {
+            if (x < 10 && y  + length < 10){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public Boolean isPossibleShip(Ship myShip) {
         for (Ship ship: ships) {
@@ -53,65 +74,6 @@ class Game {
             }
         }
         return true;
-    }
-
-    private void setHorizontal() {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Is horizontal? (y/n): ");
-        String answer = reader.next().toUpperCase();
-
-        if (answer.equals("Y")) {
-            this.isHorizontal = true;
-        }  else {
-            this.isHorizontal = false;
-        }
-    }
-
-
-    private void setRandomHorizontal() {
-        Random random = new Random();
-        this.isHorizontal = random.nextBoolean();
-    }
-
-
-    private void setFirstPosition() {
-        Scanner reader = new Scanner(System.in);
-        int x;
-        int y;
-            
-        do {
-            System.out.println("X: ");
-            x = reader.nextInt();
-        } while ((isHorizontal && x + length >= 10) || (!isHorizontal && x >= 10));
-        
-        do {
-            System.out.println("Y: ");
-            y = reader.nextInt();
-            
-        } while ((!isHorizontal && y + length >= 10) || (isHorizontal && y >= 10));
-
-        this.firstPosition[0] = x;
-        this.firstPosition[1] = y;
-    }
-
-
-    private void setRandomFirstPosition() {
-        Random random = new Random();
-        int x;
-        int y;
-
-        do {
-            x = random.nextInt(10);
-        } while ((isHorizontal && x + length < 10) || (!isHorizontal && x < 10));
-        
-        do {
-            
-            y = random.nextInt(10);
-            
-        } while ((!isHorizontal && y + length < 10) || (isHorizontal && y < 10));
-
-        this.firstPosition[0] = x;
-        this.firstPosition[1] = y;
     }
 
     

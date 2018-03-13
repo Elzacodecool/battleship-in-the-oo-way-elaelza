@@ -16,18 +16,6 @@ class Ocean {
     }
 
 
-    public Map <String, Integer> getShipsLength() {
-        Map <String, Integer> shipsLength = new HashMap<>();
-        shipsLength.put("Carrier", 5);
-        shipsLength.put("Battleship", 4);
-        shipsLength.put("Cruiser", 3);
-        shipsLength.put("Submarine", 3);
-        shipsLength.put("Destroyer", 2);
-
-        return shipsLength;
-    }
-
-
     public Square [][] setBoard(){
         Square [][] board = new Square[10][10];
 

@@ -16,7 +16,6 @@ class Game {
         }
     }
 
-<<<<<<< HEAD
 
     public void setShips(Boolean isUser) {
         Ship newShip;
@@ -116,7 +115,6 @@ class Game {
     }
 
     
-=======
     private void printSubmenu() {
         String [] mainMenu = { "1. Beginner",
                             "2. Advanced", 
@@ -127,7 +125,6 @@ class Game {
             System.out.println(e);
         }
     }
->>>>>>> 7ff71a067ffcaa06ed1146c83edc1b029f90ec2b
     public static void main (String [] args) {
         Game myGame = new Game();
         String mode;

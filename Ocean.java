@@ -85,6 +85,7 @@ class Ocean {
                 if (position.x.equals(x) && position.y.equals(y)) {
                     board[x][y].setSign("x");
                     if(checkIfSunked(ship)){
+                        setDotFrame(ship);
                         ship.sunkShip();
                     }
                     return true;
@@ -92,6 +93,22 @@ class Ocean {
             }
         }
         return false;
+    }
+
+
+    public void setDotFrame(Ship ship) {
+        for(Square position: ship.squares) {
+            for (int i = -1; i <= 1; i++) {
+                for(int j = -1; j <= 1; j++){
+                    try {
+                        if(!board[position.x + i][position.y + j].getSign().equals("x")) {
+                            board[position.x + i][position.y + j].setSign(".");
+                        }
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {}
+                }
+            }
+        }
     }
 
 

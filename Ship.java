@@ -27,8 +27,9 @@ class Ship {
                 squares.add(position);
             }
         }
-    
-        
+    }
+
+
     int length;
     Boolean isHorizontal;
     Boolean isSunk;

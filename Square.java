@@ -5,12 +5,12 @@ import java.lang.*;
 
 
 class Square {
-    int x;
-    int y;
+    Integer x;
+    Integer y;
     String sign;
 
 
-    public Square(int x, int y) {
+    public Square(Integer x, Integer y) {
         this.x = x;
         this.y = y;
         this.sign = " ";

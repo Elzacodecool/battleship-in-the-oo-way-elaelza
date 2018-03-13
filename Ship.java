@@ -7,34 +7,21 @@ import java.lang.*;
 class Ship {
     Integer length;
     Boolean isHorizontal;
+    Boolean isSunk;
     List <Square> squares = new ArrayList<>();
 
-    public Ship(Integer length, Boolean isHorizontal, int x, int y) {
+    public Ship(Integer length, Boolean isHorizontal, Integer x, Integer y) {
         this.length = length;
         this.isHorizontal = isHorizontal;
-
-        Square position = new Square(x, y);
-        squares.add(position);
-
-        if (isHorizontal) {
-            for (int i = 1; i < length; i++) {
-                position = new Square(x + i, y);
-                squares.add(position);
-            }
-        } else {
-            for (int i = 1; i < length; i++) {
-                position = new Square(x, y + i);
-                squares.add(position);
-            }
-        }
-    
+        setShip(length, x, y);    
     }  
-    int length;
-    Boolean isHorizontal;
-    Boolean isSunk;
-    int [] firstPosition = new int[2];
-    List <Square> ship = new ArrayList <>();
+    
 
+    public void sunkShip(){
+        this.isSunk = true;
+    }
+
+    
 
     public Ship(int length, Boolean isUser) {
         this.length = length;
@@ -114,17 +101,18 @@ class Ship {
     }
 
 
-    public void setShip(int length) {
+    public void setShip(Integer length, Integer x, Integer y) {
         Square position;
+
         for (int i = 0; i < length; i++) {
             
-            if (isHorizontal) {
-                position = new Square(firstPosition[0] + i, firstPosition[1]);
+            if (this.isHorizontal) {
+                position = new Square(x + i, y);
             }
             else {
-                position = new Square(firstPosition[0], firstPosition[1] + i);
+                position = new Square(x, y + i);
             }
-            ship.add(position);
+            this.squares.add(position);
         }
     }
 }

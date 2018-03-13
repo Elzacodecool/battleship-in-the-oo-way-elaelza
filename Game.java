@@ -5,8 +5,8 @@ class Game {
         return input.nextLine();
     }
 
-     private void printMenu() {
-        String [] menu = { "1. Player - Player",
+    private void printMenu() {
+        String [] mainMenu = { "1. Player - Player",
                             "2. Player - Computer", 
                             "3. Computer - Computer",
                             "4. Quit",
@@ -15,21 +15,34 @@ class Game {
             System.out.println(e);
         }
     }
+
+    private void printSubmenu() {
+        String [] mainMenu = { "1. Beginner",
+                            "2. Advanced", 
+                            "3. Madman",
+                            "4. Quit",
+                            };
+        for (String e : menu){
+            System.out.println(e);
+        }
+    }
     public static void main (String [] args) {
         Game myGame = new Game();
-        String option;
+        String mode;
         do {
             myGame.printMenu();
-            option = myGame.askUser("How would you like to play??");
+            mode = myGame.askUser("How would you like to play??");
+            level = myGame.askUser("How would you like to play??");
             switch (option) {
                 case "1":
-                break;
-                case "2":
+
                 break;
                 case "2":
                 break;
                 case "3":
-            } while ()
+                break;
+            }
+        } while (!option.equals("4"))
 
         }
 

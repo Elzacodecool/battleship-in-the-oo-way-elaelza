@@ -56,6 +56,45 @@ class Ocean {
     }
 
 
+    public void getShot() {
+        View view = new View();
+        Integer x;
+        Integer y;
+        List<Integer> position;
+        do{
+            position = view.getPosition();
+            x = position.get(0);
+            y = position.get(1);
+        } while(isHit(x, y));
+    }
+
+
+    public Boolean checkIfSunked(Ship ship) {
+        for(Square position: ship.squares) {
+            if (!board[position.x][position.y].getSign().equals("x")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public Boolean isHit(Integer x, Integer y) {
+        for(Ship ship:ships) {
+            for(Square position: ship.squares) {
+                if (position.x.equals(x) && position.y.equals(y)) {
+                    board[x][y].setSign("x");
+                    if(checkIfSunked(ship)){
+                        ship.sunkShip();
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     public static void main(String args[]){
         Ocean myOcean = new Ocean();
         

@@ -124,9 +124,9 @@ class Game {
                 System.out.println("There's no such option");
         }
 
-        ocean1.addShipsToBoard();
+        // ocean1.addShipsToBoard();
         ocean1.display();
-        ocean2.addShipsToBoard();
+        // ocean2.addShipsToBoard();
         ocean2.display();
 
         // Ocean ocean1 = new Ocean();
@@ -140,16 +140,16 @@ class Game {
 
     }
 
-    private void playGame() {
-        String name = myGame.askUser("What's your name?")
-        HighScore score = new HighScore(name);
-        do {
+    // private void playGame() {
+    //     String name = myGame.askUser("What's your name?");
+    //     HighScore score = new HighScore(name);
+    //     do {
 
 
-        } while(!mygame.isWon());
-        score.writeToFile();
+    //     } while(!mygame.isWon());
+    //     score.writeToFile();
 
-    }
+    // }
 
 
     public static void main (String [] args) {

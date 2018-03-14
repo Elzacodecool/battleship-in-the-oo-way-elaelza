@@ -30,7 +30,7 @@ class Ship {
     }
     
 
-    public void sunkShip(){
+    public void sunk(){
         this.isSunk = true;
     }
 
@@ -50,13 +50,13 @@ class Ship {
         }
     }
 
-    public Boolean getShot(Integer x, Integer y) {
-        for (Square element : squares) {
-            Boolean shotSquare = element.getShot(x, y, "X");
-            if (shotSquare) {
-                return true;
+
+    public Boolean checkIfSunked() {
+        for(Square position: squares) {
+            if (!position.getSign().equals("x")) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

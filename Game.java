@@ -7,39 +7,8 @@ import java.lang.*;
 class Game {
     String mode;
     String level;
-    View view = new View();
     Ocean ocean1 = new Ocean();
     Ocean ocean2 = new Ocean();
-
-
-    private String askUser(String question) {
-        System.out.println(question);
-        Scanner input = new Scanner(System.in);
-        return input.nextLine();
-    }
-
-    private void printMenu() {
-        String [] mainMenu = { "1. Player - Player",
-                            "2. Player - Computer", 
-                            "3. Computer - Computer",
-                            "4. Quit",
-                            };
-        for (String e : mainMenu){
-            System.out.println(e);
-        }
-    }
-
-    
-    private void printSubmenu() {
-        String [] mainMenu = { "1. Beginner",
-                            "2. Advanced", 
-                            "3. Madman",
-                            "4. Quit",
-                            };
-        for (String e : mainMenu){
-            System.out.println(e);
-        }
-    }
 
 
     private void startGame() {
@@ -60,27 +29,11 @@ class Game {
             default:
                 System.out.println("There's no such option");
         }
-
-        // ocean1.addShipsToBoard();
-        // ocean1.display();
-        // ocean1.getShot();
-        // ocean1.display();
-        // ocean2.addShipsToBoard();
-        // ocean2.display();
-
-        // Ocean ocean1 = new Ocean();
-        // setShips(ocean1, true);
-        // ocean1.addShipsToBoard();
-        // ocean1.display();
-        // Ocean ocean2 = new Ocean();
-        // setShips(ocean2, true);
-        // ocean2.addShipsToBoard();
-        // ocean2.display();
-
     }
 
     private void playGame() {
-        String name = this.askUser("What's your name?");
+        View view = new View();
+        String name = view.askUser("What's your name?");
         HighScore score = new HighScore(name);
         Boolean isComputer1 = null;
         Boolean isComputer2 = null;
@@ -103,20 +56,8 @@ class Game {
         }
 
         do {
-            Boolean shotBomb = this.getShot(ocean1, isComputer1);
-            ocean1.display();
-            if (shotBomb) {
-                System.out.println("You have shot a bomb. Game over!");
-                break;
-            }
-            
-            shotBomb = this.getShot(ocean2, isComputer2);
-            ocean2.display();
-            if (shotBomb) {
-                System.out.println("You have shot a bomb. Game over!");
-                break;
-            }
-
+            ocean2.getShot(isComputer1);
+            ocean1.getShot(isComputer2);
         } while (!this.isWon());
         score.writeToFile();
     }
@@ -125,35 +66,37 @@ class Game {
         return false; //TODO
     }
 
-    private Boolean getShot(Ocean ocean, Boolean isComputer) {
-        List<Integer> position = null;
-        Integer x;
-        Integer y;
-        if (isComputer) {
-            if (this.level.equals("1")) {
-                position = view.getRandomPosition();
-            } //else {
-                // TODO aiming
-           // }
-        } else {
-            position = view.getPosition();
-        }
-        x = position.get(0);
-        y = position.get(1);
+    // private Boolean getShot(Ocean ocean, Boolean isComputer) {
+    //     View view = new View();
+    //     List<Integer> position = null;
+    //     Integer x;
+    //     Integer y;
+    //     if (isComputer) {
+    //         if (this.level.equals("1")) {
+    //             position = view.getRandomPosition();
+    //         } //else {
+    //             // TODO aiming
+    //        // }
+    //     } else {
+    //         position = view.getPosition();
+    //     }
+    //     x = position.get(0);
+    //     y = position.get(1);
 
-        return ocean.getShot(x, y);
-    }
+    //     return ocean.getShot(x, y);
+    // }
 
 
     public static void main (String [] args) {
         Game myGame = new Game();
+        View view = new View();
 
         String mode;
         do {
-            myGame.printMenu();
-            myGame.mode = myGame.askUser("How would you like to play??");
-            myGame.printSubmenu();
-            myGame.level = myGame.askUser("How would you like to play??");
+            view.printMenu();
+            myGame.mode = view.askUser("How would you like to play??");
+            view.printSubmenu();
+            myGame.level = view.askUser("How would you like to play??");
             myGame.startGame();
             myGame.playGame();
         } while (!myGame.level.equals("4"));

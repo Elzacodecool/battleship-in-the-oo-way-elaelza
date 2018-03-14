@@ -25,12 +25,4 @@ class Square {
     public String getSign() {
         return this.sign;
     }
-
-    public Boolean getShot(Integer x, Integer y, String sign) {
-        if (this.x == x && this.y == y) {
-            this.sign = sign;
-            return true;
-        }
-        return false;
-    }
 }

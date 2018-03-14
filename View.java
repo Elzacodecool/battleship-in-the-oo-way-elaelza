@@ -1,10 +1,30 @@
 import java.util.*;
 
 class View {
-    Square [][] boardPlayer1;
-    Square [][] boardPlayer2;
-
-    public void displayBoard() {
+    public void displayBoards(Ocean ocean1, Ocean ocean2) {
+        String line = "";
+        for(int i = 0; i < 47; i++){
+            line += "-";
+        }
+        System.out.print(line);
+        System.out.printf("\n|    %-14s|%3d|    %-14s|%3d|\n", ocean1.score.name, ocean1.score.shotsCount, 
+                            ocean2.score.name, ocean2.score.shotsCount);
+        System.out.print(line);
+        System.out.printf("\n|   %1$s|   %1$s|\n", "A B C D E F G H I J");
+        for (int i = 0; i < 10; i++) {
+            System.out.print("|");
+            System.out.printf("%2d", i+1);
+            for (int j = 0; j < 10; j++) {
+                System.out.printf(" %s", ocean1.board[i][j].getSign());
+            }
+            System.out.print("|");
+            System.out.printf("%2d", i+1);
+            for (int j = 0; j < 10; j++) {
+                System.out.printf(" %s", ocean2.board[i][j].getSign());
+            }
+            System.out.print("|\n");
+        }
+        System.out.println(line);     
 
     }
 

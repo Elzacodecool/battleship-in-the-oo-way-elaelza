@@ -3,6 +3,8 @@ import java.util.*;
 class View {
     public void displayBoards(Ocean ocean1, Ocean ocean2) {
         String line = "";
+
+        System.out.print("\033[H\033[2J"); 
         for(int i = 0; i < 47; i++){
             line += "-";
         }
@@ -11,16 +13,16 @@ class View {
                             ocean2.score.name, ocean2.score.shotsCount);
         System.out.print(line);
         System.out.printf("\n|   %1$s|   %1$s|\n", "A B C D E F G H I J");
-        for (int i = 0; i < 10; i++) {
+        for (int y = 0; y < 10; y++) {
             System.out.print("|");
-            System.out.printf("%2d", i+1);
-            for (int j = 0; j < 10; j++) {
-                System.out.printf(" %s", ocean1.board[i][j].getSign());
+            System.out.printf("%2d", y+1);
+            for (int x = 0; x < 10; x++) {
+                System.out.printf(" %s", ocean1.board[x][y].getSign());
             }
             System.out.print("|");
-            System.out.printf("%2d", i+1);
-            for (int j = 0; j < 10; j++) {
-                System.out.printf(" %s", ocean2.board[i][j].getSign());
+            System.out.printf("%2d", y+1);
+            for (int x = 0; x < 10; x++) {
+                System.out.printf(" %s", ocean2.board[x][y].getSign());
             }
             System.out.print("|\n");
         }

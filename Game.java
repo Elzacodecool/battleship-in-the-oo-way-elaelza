@@ -9,22 +9,32 @@ class Game {
     String level;
     Ocean ocean1 = new Ocean();
     Ocean ocean2 = new Ocean();
+    View view = new View();
 
 
     private void startGame() {
-
+        Integer number = 0;
+        if (this.level.equals("3")) {
+            number = Integer.parseInt(view.askUser("How many bombs would you like to set?")); 
+        }
         switch (mode) {
             case "1":
                 ocean1.setShips(false);
+                ocean1.setBombs(number);
                 ocean2.setShips(false);
+                ocean2.setBombs(number);
             break;
             case "2":
                 ocean1.setShips(false);
+                ocean1.setBombs(number);
                 ocean2.setShips(true);
+                ocean2.setBombs(number);
             break;
             case "3":
                 ocean1.setShips(true);
+                ocean1.setBombs(number);
                 ocean2.setShips(true);
+                ocean2.setBombs(number);
             break;
             default:
                 System.out.println("There's no such option");
@@ -32,7 +42,7 @@ class Game {
     }
 
     private void playGame() {
-        View view = new View();
+        
         String name = view.askUser("What's your name?");
         HighScore score = new HighScore(name);
         Boolean isComputer1 = null;

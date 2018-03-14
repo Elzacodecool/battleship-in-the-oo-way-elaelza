@@ -6,13 +6,8 @@ import java.lang.*;
 
 class Ocean {
     List<Ship> ships = new ArrayList<> ();
-    List<Bomb> bombs = new ArrayList<>();
-<<<<<<< HEAD
+    List<Square> bombs = new ArrayList<>();
     View view = new View();
-
-    // List <Bomb> bombs = new ArrayList<> ();
-=======
->>>>>>> 7e2c85d5017da9cb3fb9ec48a7b7e6804ae55690
     Square [][] board;
     
 
@@ -40,6 +35,12 @@ class Ocean {
             for(Square position: ship.squares) {
                 board[position.x][position.y] = position;
             }
+        }
+    }
+
+    private void changeReferenceBomb() {
+        for (Square position: bombs){
+            board[position.x][position.y] = position;
         }
     }
 
@@ -85,10 +86,9 @@ class Ocean {
             x = position.get(0);
             y = position.get(1);      
             } while (!isPossibleBomb(x, y));
-            Bomb myBomb = new Bomb (x, y);
+            Square myBomb = new Square(x, y);
+            changeReferenceBomb();
             bombs.add(myBomb);
-            
-            
         }
     }
 
@@ -98,6 +98,7 @@ class Ocean {
         }
         return true;
     }
+
     private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
         if (isHorizontal) {
             if (x + length < 10 && y < 10){
@@ -132,39 +133,11 @@ class Ocean {
     }
 
 
-<<<<<<< HEAD
-    // public void setShip(Boolean isHorizontal, Integer x, Integer y, Integer length) {
-    //     Ship newShip = new Ship(length, isHorizontal, x, y);
-    //     this.ships.add(newShip);
-    // }
-    public Boolean getShot(Integer x, Integer y) {
-        for (Bomb element : bombs) {
-            Boolean shotBomb = element.getShot(x, y);
-            if (shotBomb) {
-                return true;
-            }
-        }
-
-        for (Ship element : ships) {
-            Boolean shotShip = element.getShot(x, y);
-            if (shotShip) {
-                return false;
-            }
-        }
- 
-        for (Square[] row : board) {
-            for (Square element : row) {
-                Boolean shotEmpty = element.getShot(x, y, ".");
-                if (shotEmpty) {
-                    return false;
-                }
-=======
     
     public void getShot(Boolean isComputer) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
-        View view = new View();
         String sign;
         do{
             if (isComputer){
@@ -189,7 +162,6 @@ class Ocean {
         for (Ship ship: ships){
             if (ship.checkIfSunked()){
                 setDotFrame(ship);
->>>>>>> 7e2c85d5017da9cb3fb9ec48a7b7e6804ae55690
             }
 
         }
@@ -200,6 +172,11 @@ class Ocean {
         for(Ship ship: ships) {
             if (ship.squares.contains(board[x][y])) {
                 return "x";
+            }
+        }
+        for(Square bomb: bombs) {
+            if (bombs.contains(board[x][y])) {
+                return "@";
             }
         }
         return ".";

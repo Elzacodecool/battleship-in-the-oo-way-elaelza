@@ -19,7 +19,7 @@ class Game {
                 ocean2.setShips(false);
             break;
             case "2":
-                ocean1.setShips(false);
+                ocean1.setShips(true);
                 ocean2.setShips(true);
             break;
             case "3":
@@ -33,8 +33,6 @@ class Game {
 
     private void playGame() {
         View view = new View();
-        String name = view.askUser("What's your name?");
-        HighScore score = new HighScore(name);
         Boolean isComputer1 = null;
         Boolean isComputer2 = null;
 
@@ -56,10 +54,11 @@ class Game {
         }
 
         do {
+            view.displayBoards(ocean1, ocean2);
             ocean2.getShot(isComputer1);
             ocean1.getShot(isComputer2);
         } while (!this.isWon());
-        score.writeToFile();
+        
     }
 
     public Boolean isWon () {

@@ -8,9 +8,37 @@ class View {
 
     }
 
-    //public List<Integer> getFirstPosition() {
+    private String askUser(String question) {
+        System.out.println(question);
+        Scanner input = new Scanner(System.in);
+        return input.nextLine();
+    }
 
-    //}
+
+    private void printMenu() {
+        String [] mainMenu = { "1. Player - Player",
+                            "2. Player - Computer", 
+                            "3. Computer - Computer",
+                            "4. Quit",
+                            };
+        for (String e : mainMenu){
+            System.out.println(e);
+        }
+    }
+
+
+    private void printSubmenu() {
+        String [] mainMenu = { "1. Beginner",
+                            "2. Advanced", 
+                            "3. Madman",
+                            "4. Quit",
+                            };
+        for (String e : mainMenu){
+            System.out.println(e);
+        }
+    }
+
+
     public List<Integer> getPosition() {
         Scanner reader = new Scanner(System.in);
         List <Integer> position = new ArrayList<>();

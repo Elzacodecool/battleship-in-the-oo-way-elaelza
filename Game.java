@@ -12,36 +12,6 @@ class Game {
     Ocean ocean2 = new Ocean();
 
 
-    private String askUser(String question) {
-        System.out.println(question);
-        Scanner input = new Scanner(System.in);
-        return input.nextLine();
-    }
-
-    private void printMenu() {
-        String [] mainMenu = { "1. Player - Player",
-                            "2. Player - Computer", 
-                            "3. Computer - Computer",
-                            "4. Quit",
-                            };
-        for (String e : mainMenu){
-            System.out.println(e);
-        }
-    }
-
-    
-    private void printSubmenu() {
-        String [] mainMenu = { "1. Beginner",
-                            "2. Advanced", 
-                            "3. Madman",
-                            "4. Quit",
-                            };
-        for (String e : mainMenu){
-            System.out.println(e);
-        }
-    }
-
-
     private void startGame() {
 
         switch (mode) {
@@ -60,23 +30,6 @@ class Game {
             default:
                 System.out.println("There's no such option");
         }
-
-        // ocean1.addShipsToBoard();
-        // ocean1.display();
-        // ocean1.getShot();
-        // ocean1.display();
-        // ocean2.addShipsToBoard();
-        // ocean2.display();
-
-        // Ocean ocean1 = new Ocean();
-        // setShips(ocean1, true);
-        // ocean1.addShipsToBoard();
-        // ocean1.display();
-        // Ocean ocean2 = new Ocean();
-        // setShips(ocean2, true);
-        // ocean2.addShipsToBoard();
-        // ocean2.display();
-
     }
 
     private void playGame() {

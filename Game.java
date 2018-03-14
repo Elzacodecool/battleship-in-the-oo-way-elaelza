@@ -54,9 +54,14 @@ class Game {
         }
 
         do {
-            view.displayBoards(ocean1, ocean2);
-            ocean2.getShot(isComputer1);
-            ocean1.getShot(isComputer2);
+            do{
+                view.displayBoards(ocean1, ocean2);
+                
+            } while(ocean2.getShot(isComputer1));
+
+            do{
+                view.displayBoards(ocean1, ocean2);
+            } while(ocean1.getShot(isComputer2));
         } while (!this.isWon());
         
     }
@@ -64,26 +69,6 @@ class Game {
     public Boolean isWon () {
         return false; //TODO
     }
-
-    // private Boolean getShot(Ocean ocean, Boolean isComputer) {
-    //     View view = new View();
-    //     List<Integer> position = null;
-    //     Integer x;
-    //     Integer y;
-    //     if (isComputer) {
-    //         if (this.level.equals("1")) {
-    //             position = view.getRandomPosition();
-    //         } //else {
-    //             // TODO aiming
-    //        // }
-    //     } else {
-    //         position = view.getPosition();
-    //     }
-    //     x = position.get(0);
-    //     y = position.get(1);
-
-    //     return ocean.getShot(x, y);
-    // }
 
 
     public static void main (String [] args) {

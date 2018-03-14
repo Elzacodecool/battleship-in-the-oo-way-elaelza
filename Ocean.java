@@ -111,27 +111,32 @@ class Ocean {
 
 
     
-    public void getShot(Boolean isComputer) {
+    public Boolean getShot(Boolean isComputer) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
         View view = new View();
         String sign;
-        do{
-            if (isComputer){
-                position = view.getRandomPosition();
-            }
-            else {
-                position = view.getPosition();
-            }
+    
+        if (isComputer){
+            position = view.getRandomPosition();
+        }
+        else {
+            position = view.getPosition();
+        }
+        
+        x = position.get(0);
+        y = position.get(1);
+        sign = this.getSign(x, y);
+        this.board[x][y].setSign(sign);
+        this.checkSunk();
             
-            x = position.get(0);
-            y = position.get(1);
-            sign = getSign(x, y);
-            board[x][y].setSign(sign);
-            this.checkSunk();
-            this.display();
-        } while(board[x][y].getSign().equals("x"));
+        if(this.board[x][y].getSign().equals("x")){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 

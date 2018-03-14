@@ -124,10 +124,12 @@ class Game {
                 System.out.println("There's no such option");
         }
 
-        // ocean1.addShipsToBoard();
+        ocean1.addShipsToBoard();
+        ocean1.display();
+        ocean1.getShot();
         ocean1.display();
         // ocean2.addShipsToBoard();
-        ocean2.display();
+        // ocean2.display();
 
         // Ocean ocean1 = new Ocean();
         // setShips(ocean1, true);

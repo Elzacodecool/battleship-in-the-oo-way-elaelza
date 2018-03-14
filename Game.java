@@ -84,7 +84,6 @@ class Game {
         HighScore score = new HighScore(name);
         Boolean isComputer1 = null;
         Boolean isComputer2 = null;
-<<<<<<< HEAD
 
         switch (mode) {
             case "1":
@@ -142,65 +141,6 @@ class Game {
         x = position.get(0);
         y = position.get(1);
 
-=======
-
-        switch (mode) {
-            case "1":
-                isComputer1 = false;
-                isComputer2 = false;
-            break;
-            case "2":
-                isComputer1 = false;
-                isComputer2 = true;
-            break;
-            case "3":
-                isComputer1 = true;
-                isComputer2 = true;
-            break;
-            default:
-                System.out.println("There's no such option");
-        }
-
-        do {
-            Boolean shotBomb = this.getShot(ocean1, isComputer1);
-            ocean1.display();
-            if (shotBomb) {
-                System.out.println("You have shot a bomb. Game over!");
-                break;
-            }
-            
-            shotBomb = this.getShot(ocean2, isComputer2);
-            ocean2.display();
-            if (shotBomb) {
-                System.out.println("You have shot a bomb. Game over!");
-                break;
-            }
-
-        } while (!this.isWon());
-        score.writeToFile();
-    }
-
-    public Boolean isWon () {
-        return true; //TODO
-    }
-
-    private Boolean getShot(Ocean ocean, Boolean isComputer) {
-        List<Integer> position = null;
-        Integer x;
-        Integer y;
-        if (isComputer) {
-            if (this.level.equals("1")) {
-                position = view.getRandomPosition();
-            } //else {
-                // TODO aiming
-           // }
-        } else {
-            position = view.getPosition();
-        }
-        x = position.get(0);
-        y = position.get(1);
-
->>>>>>> 9d3f38f04b5e79d8e7acb80e25f461d22a7fb7ce
         return ocean.getShot(x, y);
     }
 

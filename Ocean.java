@@ -7,6 +7,7 @@ import java.lang.*;
 class Ocean {
     List<Ship> ships = new ArrayList<> ();
     List<Bomb> bombs = new ArrayList<>();
+    View view = new View();
 
     // List <Bomb> bombs = new ArrayList<> ();
     Square [][] board;
@@ -39,7 +40,6 @@ class Ocean {
         }
     }
 
-
     public void setShips(Boolean isComputer) {
         Boolean isHorizontal;
         List<Integer> position;
@@ -48,7 +48,7 @@ class Ocean {
         Integer y;
         Ship newShip;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
-        View view = new View();
+        
         
 
         for(String name: shipsLength.keySet()){
@@ -70,11 +70,31 @@ class Ocean {
             
             ships.add(newShip);
         }  
-
-            
-
     }
 
+    public void setBombs(int number){
+        Integer x;
+        Integer y;
+        List <Integer> position;
+        for (int i = 0 ; i < number; i++) {
+            do {
+            position = view.getRandomPosition(); 
+            x = position.get(0);
+            y = position.get(1);      
+            } while (!isPossibleBomb(x, y));
+            Bomb myBomb = new Bomb (x, y);
+            bombs.add(myBomb);
+            
+            
+        }
+    }
+
+    private Boolean isPossibleBomb(Integer x, Integer y) {
+        if (board[x][y].equals("X")) {
+            return false;
+        }
+        return true;
+    }
     private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
         if (isHorizontal) {
             if (x + length < 10 && y < 10){
@@ -116,20 +136,18 @@ class Ocean {
     public Boolean getShot(Integer x, Integer y) {
         for (Bomb element : bombs) {
             Boolean shotBomb = element.getShot(x, y);
-            // TODO change sign
             if (shotBomb) {
                 return true;
             }
         }
-        //ship check if were hit change signShip for X
+
         for (Ship element : ships) {
             Boolean shotShip = element.getShot(x, y);
-            //TODO change sign
             if (shotShip) {
-                return false; //not a bomb
+                return false;
             }
         }
-        //change signShip for O
+ 
         for (Square[] row : board) {
             for (Square element : row) {
                 Boolean shotEmpty = element.getShot(x, y, ".");
@@ -147,8 +165,7 @@ class Ocean {
             for (Square square: myShip.squares) {
                 board[square.x][square.y].setSign("x");
             }
-        }
-        
+        } 
     }
 
 

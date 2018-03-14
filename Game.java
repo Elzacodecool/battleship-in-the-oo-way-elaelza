@@ -58,19 +58,6 @@ class Game {
         do {
             ocean2.getShot(isComputer1);
             ocean1.getShot(isComputer2);
-            // ocean1.display();
-            // if (shotBomb) {
-            //     System.out.println("You have shot a bomb. Game over!");
-            //     break;
-            // }
-            
-            // shotBomb = this.getShot(ocean2, isComputer2);
-            // ocean2.display();
-            // if (shotBomb) {
-            //     System.out.println("You have shot a bomb. Game over!");
-            //     break;
-            // }
-
         } while (!this.isWon());
         score.writeToFile();
     }

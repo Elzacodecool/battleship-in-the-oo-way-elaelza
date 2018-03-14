@@ -7,10 +7,8 @@ import java.lang.*;
 class Ocean {
     List<Ship> ships = new ArrayList<> ();
     List<Bomb> bombs = new ArrayList<>();
-
-    // List <Bomb> bombs = new ArrayList<> ();
     Square [][] board;
-    // String level;
+    
 
 
     public Ocean () {
@@ -189,12 +187,5 @@ class Ocean {
                 }
             }
         }
-    }
-
-
-    public static void main(String args[]){
-        // Ocean myOcean = new Ocean();
-        
-        // myOcean.display();
     }
 }

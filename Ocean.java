@@ -7,12 +7,15 @@ import java.lang.*;
 class Ocean {
     List<Ship> ships = new ArrayList<> ();
     List<Bomb> bombs = new ArrayList<>();
+    View view = new View();
+    HighScore score; 
     Square [][] board;
     
 
 
     public Ocean () {
         this.board = setBoard();
+        this.score = new HighScore(view.askUser("What's your name?"));
     }
 
 

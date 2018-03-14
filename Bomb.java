@@ -18,6 +18,9 @@ class Bomb {
         return false;
     }
 
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
 
     public static void main(String [] args) {
 

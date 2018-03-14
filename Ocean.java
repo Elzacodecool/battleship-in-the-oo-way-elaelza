@@ -6,9 +6,9 @@ import java.lang.*;
 
 class Ocean {
     List<Ship> ships = new ArrayList<> ();
-    List<Bomb> bombs = new ArrayList<>();
+    List<Square> bombs = new ArrayList<>();
+    HighScore score;
     View view = new View();
-    HighScore score; 
     Square [][] board;
     
 
@@ -40,6 +40,11 @@ class Ocean {
         }
     }
 
+    private void changeReferenceBomb() {
+        for (Square position: bombs){
+            board[position.x][position.y] = position;
+        }
+    }
 
     public void setShips(Boolean isComputer) {
         Boolean isHorizontal;
@@ -49,7 +54,7 @@ class Ocean {
         Integer y;
         Ship newShip;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
-        View view = new View();
+        
         
 
         for(String name: shipsLength.keySet()){
@@ -71,9 +76,29 @@ class Ocean {
             
             ships.add(newShip);
         }  
+    }
 
-            
+    public void setBombs(int number){
+        Integer x;
+        Integer y;
+        List <Integer> position;
+        for (int i = 0 ; i < number; i++) {
+            do {
+            position = view.getRandomPosition(); 
+            x = position.get(0);
+            y = position.get(1);      
+            } while (!isPossibleBomb(x, y));
+            Square myBomb = new Square(x, y);
+            changeReferenceBomb();
+            bombs.add(myBomb);
+        }
+    }
 
+    private Boolean isPossibleBomb(Integer x, Integer y) {
+        if (board[x][y].equals("X")) {
+            return false;
+        }
+        return true;
     }
 
     private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
@@ -115,7 +140,6 @@ class Ocean {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
-        View view = new View();
         String sign;
     
         if (isComputer){
@@ -157,6 +181,11 @@ class Ocean {
                 return "x";
             }
         }
+        for(Square bomb: bombs) {
+            if (bombs.contains(board[x][y])) {
+                return "@";
+            }
+        }
         return ".";
     }
 
@@ -165,8 +194,7 @@ class Ocean {
             for (Square square: myShip.squares) {
                 board[square.x][square.y].setSign("x");
             }
-        }
-        
+        } 
     }
 
 

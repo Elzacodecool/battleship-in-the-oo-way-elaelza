@@ -1,0 +1,59 @@
+statki na siebie nie nachodza Eliza  - 
+Statki nie lezą bezposrednio obok siebie - Eliza
+Statki nie wychodza poza zakres listy - Eiza-  checkIfInRange() - czy poczatek i konec statku 
+
+Uzytkownik wprowadza statki  - Ela 
+ The 5 ships are: Carrier (occupies 5 spaces), Battleship (4), Cruiser (3), Submarine (3), and Destroyer (2). -
+Ship name, horridontal,space 
+- komputer wprowadza statki na plansze
+
+
+Obiekt do zapamietywania zgadnietych statkow
+
+
+
+
+
+
+Main java do zarzadzania mechanika gry
+		
+	+Player - player
+            + Player - computer
+	
+	+ computer - computer
+
+Guess in turns
+Response hit -X  - miss - O 
+
+Player-Player
+Level 1: jak zatopisz statek - dookola kropki, jak pomylisz i wybierzesz kropke nie zabiera Ci zycia
+10 
+
+Level 2
+Nie pojawiaja sie kropki po zatopieniu statku
+
+Level 3 
+Rozsypa po planszy miny - koniec gry.
+
+Player computer:
+
+Level 1: 
+	- jak zatopisz statek - dookola kropki, jak pomylisz i wybierzesz kropke nie zabiera Ci zycia
+	10 
+	- komputer nie rejestruje gdzie strzela, sprawdza czy puste
+
+
+Level 2
+	-Nie pojawiaja sie kropki po zatopieniu statku
+	-losuje i jak trafi statek to strzela obok az zatopi,
+
+
+Level 3 
+Rozsypa po planszy miny - zabieraja dwie kolejki
+Komputer jak w 2 i wie gdzie nie strzelać
+
+decyzja czy moze strzelac na poziomie strzlu - w array ocean
+Square sign X O “ “ . @
+Pole w ship - sunk gdy wszystkie Square sa X zmienia ple na sunk i zmienia pole Square obok na “.”
+Ship usuwac z listy gdy pusta game over
+Ranking czas imie data ilosc strzalow

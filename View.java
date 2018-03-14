@@ -8,14 +8,14 @@ class View {
 
     }
 
-    private String askUser(String question) {
+    public String askUser(String question) {
         System.out.println(question);
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
 
 
-    private void printMenu() {
+    public void printMenu() {
         String [] mainMenu = { "1. Player - Player",
                             "2. Player - Computer", 
                             "3. Computer - Computer",
@@ -27,7 +27,7 @@ class View {
     }
 
 
-    private void printSubmenu() {
+    public void printSubmenu() {
         String [] mainMenu = { "1. Beginner",
                             "2. Advanced", 
                             "3. Madman",

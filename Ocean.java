@@ -99,7 +99,7 @@ class Ocean {
                 position = view.getRandomPosition(); 
                 x = position.get(0);
                 y = position.get(1);      
-            } while (!isPossibleBomb(x, y));
+            } while (!this.isPossibleBomb(x, y));
             Square myBomb = new Square(x, y);
             this.changeReferenceBomb();
             this.bombs.add(myBomb);
@@ -108,8 +108,12 @@ class Ocean {
 
 
     private Boolean isPossibleBomb(Integer x, Integer y) {
-        if (board[x][y].equals("x")) {
-            return false;
+        for (Ship ship: ships) {
+            for (Square element : ship.squares) {
+                if (element.x.equals(x) &&  element.y.equals(y)) {
+                    return false;
+                }
+            }  
         }
         return true;
     }
@@ -153,7 +157,7 @@ class Ocean {
     }
 
     
-    public Boolean getShot(Boolean isComputer, String level) {
+    public Boolean getShot(Boolean isComputer, String level) throws BombException{
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
@@ -175,6 +179,9 @@ class Ocean {
         if(this.board[x][y].getSign().equals("x")){
             return true;
         } else {
+            if(this.board[x][y].getSign().equals("@")) {
+                throw new BombException("You have found bomb. Game Over.");
+            }
             return false;
         }
     }

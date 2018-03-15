@@ -49,7 +49,7 @@ class Game {
         }
     }
 
-    private void playGame() {
+    private void playGame() throws BombException {
         Boolean isComputer1 = null;
         Boolean isComputer2 = null;
 
@@ -103,13 +103,13 @@ class Game {
         Integer shipCount = 5;
         for (Ship ship: ocean1.ships){
             if (ship.checkIfSunked()){
-                counterOcean2 +=1;
+                counterOcean2 += 1;
             }
             System.out.println(ship.checkIfSunked());
         }
         for (Ship ship: ocean2.ships){
             if (ship.checkIfSunked()){
-                counterOcean1 +=1;
+                counterOcean1 += 1;
             }
         }
         if (counterOcean1.equals(shipCount)) {
@@ -157,7 +157,12 @@ class Game {
             view.printSubmenu();
             myGame.level = view.askUser("How would you like to play??");
             myGame.startGame();
+            try {
             myGame.playGame();
+            } catch (BombException e) {
+                view.displayBoards(myGame.ocean1, myGame.ocean2, true);
+                System.out.println("You have found bomb. Game Over.\n");
+            }
         } while (isPlaying);
 
     }

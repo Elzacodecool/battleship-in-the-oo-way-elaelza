@@ -164,7 +164,13 @@ class Ocean {
         String sign;
         
         if (isComputer){
-            position = view.getRandomPosition();
+            if (level.equals("1")){
+                position = view.getRandomPosition();
+            }
+            else {
+                position = view.getInteligentPosition(board, ships);
+            }
+            
         }
         else {
             position = view.getPosition();

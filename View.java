@@ -127,6 +127,63 @@ class View {
     }
 
 
+    public List<Integer> getInteligentPosition(Square [][] board, List<Ship> ships) {
+        Integer x;
+        Integer y;
+        List <Integer> position = new ArrayList<>();
+
+        do {
+            position = getNextPosition(board, ships);
+            x = position.get(0);
+            y = position.get(1);
+
+        } while (!board[x][y].getSign().equals(" "));
+       
+        return position;
+
+    }
+
+
+    private List <Integer> getNextPosition(Square[][] board, List<Ship> ships) {
+        Random random = new Random();
+        Integer x;
+        Integer y;
+        Integer shift;
+        Boolean checkHorizontal;
+        List <Integer> position = new ArrayList<>();
+        for(Ship ship: ships){
+            for(Square pos: ship.squares){
+                if(pos.getSign().equals("x") && !ship.checkIfSunked()){  
+                    checkHorizontal = random.nextBoolean();
+                    shift = (random.nextBoolean()) ? 1 : -1;
+                    if (checkHorizontal) {
+                        x = pos.x + shift;
+                        y = pos.y;
+                    }
+                    else {
+                        x = pos.x;
+                        y = pos.y + shift;
+                    }
+                    if (isPossiblePossition(x, y) && !board[x][y].getSign().equals("x")){
+                        position.add(x);
+                        position.add(y);
+
+                        return position;
+                    }
+                }
+            }
+        }
+        return getRandomPosition();
+    }
+
+    private Boolean isPossiblePossition (Integer x, Integer y) {
+        if (x <10 && x >= 0 && y < 10 && y >= 0) {
+            return true;
+        }
+        return  false;
+    }
+
+
     public List<Integer> getPosition() {
         Scanner reader = new Scanner(System.in);
         String input;
@@ -139,7 +196,7 @@ class View {
 
             try{
                 x = "ABCDEFGHIJ".indexOf(input.substring(0, 1));
-                y = Integer.parseInt(input.substring(1).trim());
+                y = Integer.parseInt(input.substring(1).trim()) - 1;
             }
             catch (NumberFormatException e) {
                 System.err.println("wrong format");
@@ -152,10 +209,10 @@ class View {
                 y = 10;
             }
             
-        } while(x > 9 || x < 0 || y > 10 || y <= 0);
+        } while(!isPossiblePossition(x, y));
 
         position.add(x);
-        position.add(y - 1);
+        position.add(y);
         
 
         return position;

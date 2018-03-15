@@ -6,10 +6,11 @@ import java.lang.*;
 
 class Game {
     String mode;
-    String level;
+    String level = "1";
     Ocean ocean1 = new Ocean();
     Ocean ocean2 = new Ocean();
     View view = new View();
+    String fileName = "Score.txt";
 
 
     private void startGame() {
@@ -35,6 +36,12 @@ class Game {
                 ocean1.setBombs(number);
                 ocean2.setShips(true);
                 ocean2.setBombs(number);
+            break;
+            case "4":
+                String [] highScore = readArray(fileName);
+                for (String element : highScore) {
+                    System.out.println(element);
+                }
             break;
             default:
                 System.out.println("There's no such option");
@@ -84,6 +91,7 @@ class Game {
     public Boolean isWon () {
         Integer counterOcean1 = 0;
         Integer counterOcean2 = 0;
+        Integer shipCount = 5;
         for (Ship ship: ocean1.ships){
             if (ship.checkIfSunked()){
                 counterOcean2 +=1;
@@ -95,34 +103,53 @@ class Game {
                 counterOcean1 +=1;
             }
         }
-        if (counterOcean1.equals(5)) {
+        if (counterOcean1.equals(shipCount)) {
             ocean1.gameOver();
             return true;
-        } else if (counterOcean2.equals(5)) { 
+        } else if (counterOcean2.equals(shipCount)) { 
             ocean2.gameOver();
             return true;
         } else {
             return false;
         }
-        
     }
 
-    
-
+    private String[] readArray(String fileName) {
+        String[] stringArr = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            List<String> my_collection = new ArrayList<String>();
+            while((line = br.readLine()) != null) {
+                my_collection.add(line);
+            }
+            stringArr = my_collection.toArray(new String[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringArr;    
+    }
 
     public static void main (String [] args) {
         Game myGame = new Game();
-        String mode;
+        Boolean isPlaying = true;
         do {
             myGame = new Game();
             View view = new View();
             view.printMenu();
-            myGame.mode = view.askUser("How would you like to play??");
+            myGame.mode = view.askUser("What would you like to do?");
+            if (myGame.mode.equals("4")) {
+                myGame.startGame();
+                continue;
+            } else {
+                if (myGame.mode.equals("5")) {
+                break;
+                }
+            }
             view.printSubmenu();
             myGame.level = view.askUser("How would you like to play??");
             myGame.startGame();
             myGame.playGame();
-        } while (!myGame.level.equals("4"));
+        } while (isPlaying);
 
     }
 }

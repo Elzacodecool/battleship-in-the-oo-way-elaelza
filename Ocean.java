@@ -82,7 +82,7 @@ class Ocean {
                 y = position.get(1);
                 newShip = new Ship(length, isHorizontal, x, y);
                 
-            } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ships, newShip));
+            } while (!isPossible(isHorizontal, x, y, length, isComputer) || !isPossibleShip(ships, newShip, isComputer));
             
             ships.add(newShip);
             this.changeReference(); 

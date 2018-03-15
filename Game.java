@@ -10,7 +10,7 @@ class Game {
     Ocean ocean1 = new Ocean();
     Ocean ocean2 = new Ocean();
     View view = new View();
-    String fileName = "Score.txt";
+    String fileName = "score.txt";
 
 
     private void startGame() {
@@ -18,15 +18,16 @@ class Game {
         if (this.level.equals("3")) {
             number = Integer.parseInt(view.askUser("How many bombs would you like to set?")); 
         }
+
         switch (mode) {
             case "1":
-                ocean1.setShips(true);
+                ocean1.setShips(checkIflazy());
                 ocean1.setBombs(number);
-                ocean2.setShips(true);
+                ocean2.setShips(checkIflazy());
                 ocean2.setBombs(number);
             break;
             case "2":
-                ocean1.setShips(true);
+                ocean1.setShips(checkIflazy());
                 ocean1.setBombs(number);
                 ocean2.setShips(true);
                 ocean2.setBombs(number);
@@ -85,6 +86,14 @@ class Game {
             } while(ocean1.getShot(isComputer2, this.level));
         } while (!this.isWon());
         
+    }
+
+    private Boolean checkIflazy() {
+        String answer = view.askUser("Would you like me to set your ships for you?(Y/N)");
+        if (answer.toUpperCase().equals("Y")) {
+            return true;
+        }
+        return false;
     }
 
     public Boolean isWon () {

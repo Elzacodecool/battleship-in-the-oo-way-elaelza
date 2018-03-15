@@ -72,7 +72,8 @@ class View {
             
             for (int x = 0; x < 10; x++) {
                 sign = ocean1.board[x][y].getSign(); 
-                sign = (ocean1.board[x][y].getSign().equals("x") && x != 9 && ocean1.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
+                sign = (ocean1.board[x][y].getSign().equals("x") && x != 9 
+                        && ocean1.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
                 for(Ship ship: ocean1.ships){
                     if (ship.squares.contains(ocean1.board[x][y])) {
                         if (ship.checkIfSunked()){
@@ -130,13 +131,13 @@ class View {
     }
 
 
-    public List<Integer> getIntelligentPosition(Square [][] board, List<Ship> ships) {
+    public List<Integer> getIntelligentPosition(Square [][] board, List<Ship> ships, List<Square> bombs) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
 
         do {
-            position = getNextPosition(board, ships);
+            position = getNextPosition(board, ships, bombs);
             x = position.get(0);
             y = position.get(1);
 
@@ -147,7 +148,7 @@ class View {
     }
 
 
-    private List <Integer> getNextPosition(Square[][] board, List<Ship> ships) {
+    private List <Integer> getNextPosition(Square[][] board, List<Ship> ships, List<Square> bombs) {
         Random random = new Random();
         Integer x1;
         Integer y1;
@@ -188,8 +189,9 @@ class View {
                         }
                     }
                     else{
-                        if (!(board[x1][y1].getSign().equals(" ") || board[x2][y2].getSign().equals(" ")) && checkIsHorizontalKnown(board, ship.squares)){
-                            continue;
+                        if (!(board[x1][y1].getSign().equals(" ") || board[x2][y2].getSign().equals(" "))
+                            && checkIsHorizontalKnown(board, ship.squares)){
+                                continue;
                         }
                     }
                     
@@ -200,7 +202,20 @@ class View {
                 }
             }
         }
-        return getRandomPosition();
+
+        return getPositionWithoutBomb(board, bombs);
+    }
+
+    private List <Integer> getPositionWithoutBomb(Square[][] board, List<Square> bombs){
+        List <Integer> position = new ArrayList<>();
+        Integer x;
+        Integer y;
+        do {
+            position = getRandomPosition();
+            x = position.get(0);
+            y = position.get(1);
+        } while(bombs.contains(board[x][y]));
+        return position;
     }
 
 
@@ -230,8 +245,8 @@ class View {
     public List<Integer> getPosition() {
         Scanner reader = new Scanner(System.in);
         String input;
-        Integer x;
-        Integer y;
+        Integer x = 10;
+        Integer y = 10;
         List <Integer> position = new ArrayList<>();
 
         do {
@@ -243,13 +258,9 @@ class View {
             }
             catch (NumberFormatException e) {
                 System.err.println("wrong format");
-                x = 10;
-                y = 10;
             }
             catch (StringIndexOutOfBoundsException e) {
                 System.err.println("enter something");
-                x = 10;
-                y = 10;
             }
             
         } while(!isPossiblePossition(x, y));

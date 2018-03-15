@@ -14,9 +14,17 @@ class Ocean {
 
     public Ocean () {
         this.board = setBoard();
-        this.score = new HighScore(view.askUser("What's your name?"));
+        this.score = new HighScore();
+        //highscore bez parametru
     }
 
+    public void prepareScore(Boolean isComputer){
+        if(isComputer) {
+            this.score.setName("AI");
+        } else {
+        this.score.setName(view.askUser("What's your name?"));
+        }
+    }
 
     private Square [][] setBoard(){
         Square [][] board = new Square[10][10];

@@ -6,18 +6,21 @@ class HighScore {
     long startTime;
     long stopTime;
     long time;
-    String name;
+    String name = "AI";
     Integer shotsCount;
     Date date = new Date();
 
 
-    public HighScore(String name) {
+    public HighScore() {
         startTime = System.currentTimeMillis();
         this.name = name;
         shotsCount = 0;
-        
-
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public void getTime() {
         this.stopTime = System.currentTimeMillis();
         this.time = this.stopTime - this.startTime;
@@ -44,13 +47,13 @@ class HighScore {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
-        String name = "Henio";
-        HighScore myScore = new HighScore(name);
-        myScore.incrementShotCount();
-        myScore.incrementShotCount();
-        myScore.getTime();
-        myScore.writeToFile();
+    // public static void main(String[] args) {
+    //     String name = "Henio";
+    //     HighScore myScore = new HighScore(name);
+    //     myScore.incrementShotCount();
+    //     myScore.incrementShotCount();
+    //     myScore.getTime();
+    //     myScore.writeToFile();
 
-    }
+    // }
 }

@@ -23,7 +23,7 @@ class HighScore {
 
     @Override
     public String toString(){
-        return name + "|" 
+        return String.format("%12s", name) + "|" 
                 + String.format("%td.%<tm.%<tY", date) + "|"
                 + shotsCount;
     }

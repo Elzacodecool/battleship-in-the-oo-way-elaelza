@@ -82,7 +82,7 @@ class Ocean {
                 y = position.get(1);
                 newShip = new Ship(length, isHorizontal, x, y);
                 this.changeReference(); 
-            } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ships, newShip));
+            } while (!isPossible(isHorizontal, x, y, length,isComputer) || !isPossibleShip(ships, newShip, isComputer));
             
             ships.add(newShip);
         }  
@@ -114,7 +114,7 @@ class Ocean {
     }
 
 
-    private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
+    private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length, Boolean isComputer){
         if (isHorizontal) {
             if (x + length < 10 && y < 10){
                 return true;
@@ -124,19 +124,23 @@ class Ocean {
                 return true;
             }
         }
-        System.out.println("Board is too small for this ship.");
+        if (!isComputer) {
+            System.out.println("Board is too small for this ship.");
+        }
         return false;
     }
 
 
-    private Boolean isPossibleShip(List <Ship> ships, Ship newShip) {
+    private Boolean isPossibleShip(List <Ship> ships, Ship newShip, Boolean isComputer) {
         for (Ship ship: ships) {
             for (Square position: ship.squares) {
                 for (Square newPosition: newShip.squares){
                     for (int i = -1; i <= 1; i++) {
                         for (int j = -1; j <= 1; j++) {
                             if (newPosition.x + i == position.x && newPosition.y + j == position.y) {
-                                System.out.println("There's no space for this ship.");
+                                if (!isComputer) {
+                                    System.out.println("There's no space for this ship.");
+                                }
                                 return false;
                             }
                         }

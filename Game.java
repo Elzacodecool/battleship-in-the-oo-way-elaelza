@@ -94,10 +94,10 @@ class Game {
             }
         }
         if (counterOcean1.equals(5)) {
-            
+            ocean1.gameOver();
             return true;
         } else if (counterOcean2.equals(5)) { 
-            
+            ocean2.gameOver();
             return true;
         } else {
             return false;

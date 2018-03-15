@@ -3,16 +3,16 @@ import java.util.*;
 import java.text.*;
 
 class HighScore {
-    long startTime;
-    long stopTime;
-    long time;
+    // long startTime;
+    // long stopTime;
+    // long time;
     String name = "AI";
     Integer shotsCount;
     Date date = new Date();
 
 
     public HighScore() {
-        startTime = System.currentTimeMillis();
+        //startTime = System.currentTimeMillis();
         this.name = name;
         shotsCount = 0;
     }
@@ -21,10 +21,10 @@ class HighScore {
         this.name = name;
     }
     
-    public void getTime() {
-        this.stopTime = System.currentTimeMillis();
-        this.time = this.stopTime - this.startTime;
-    }
+    // public void getTime() {
+    //     this.stopTime = System.currentTimeMillis();
+    //     this.time = this.stopTime - this.startTime;
+    // }
 
     public void incrementShotCount() {
         this.shotsCount += 1;
@@ -34,7 +34,7 @@ class HighScore {
     public String toString(){
         return name + "|" 
                 + String.format("%td.%<tm.%<tY", date) + "|"
-                + String.format("%1$TM:%1$TS", time) + "|"
+                //+ String.format("%1$TM:%1$TS", time) + "|"
                 + shotsCount;
     }
 

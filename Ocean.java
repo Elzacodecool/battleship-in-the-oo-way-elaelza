@@ -16,7 +16,6 @@ class Ocean {
     public Ocean () {
         this.board = setBoard();
         this.score = new HighScore();
-        //highscore bez parametru
     }
 
     public void prepareScore(Boolean isComputer){
@@ -39,6 +38,10 @@ class Ocean {
         return board;
     }
 
+    public void gameOver() {
+        System.out.println("Game Over");
+        this.score.writeToFile();
+    }
 
     private void changeReference() {
         for (Ship ship: ships){

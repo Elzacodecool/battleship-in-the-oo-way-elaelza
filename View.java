@@ -53,7 +53,6 @@ class View {
         String [] mainMenu = { "1. Beginner",
                             "2. Advanced", 
                             "3. Madman",
-                            "4. Quit",
                             };
         for (String e : mainMenu){
             System.out.println(e);

@@ -76,7 +76,24 @@ class Game {
     }
 
     public Boolean isWon () {
-        return false; //TODO
+        Integer counterOcean1 = 0;
+        Integer counterOcean2 = 0;
+        for (Ship ship: ocean1.ships){
+            if (ship.checkIfSunked()){
+                counterOcean1 +=1;
+            }
+        }
+        for (Ship ship: ocean2.ships){
+            if (ship.checkIfSunked()){
+                counterOcean2 +=1;
+            }
+        }
+        if (counterOcean1.equals(4) || counterOcean2.equals(4)){
+            return true;
+        } else { 
+            return false;
+        }
+        
     }
 
 

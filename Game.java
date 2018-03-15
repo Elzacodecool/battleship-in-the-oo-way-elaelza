@@ -35,6 +35,7 @@ class Game {
                 player2 = true;
             break;
             case "4":
+                System.out.print("\033[H\033[2J");
                 String [] highScore = readArray(fileName);
                 for (String element : highScore) {
                     System.out.println(element);

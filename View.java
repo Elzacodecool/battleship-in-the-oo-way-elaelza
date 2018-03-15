@@ -110,6 +110,7 @@ class View {
                             "4. Print HighScore",
                             "5. Quit"
                             };
+        
         for (String e : mainMenu){
             System.out.println(e);
         }
@@ -121,6 +122,8 @@ class View {
                             "2. Advanced", 
                             "3. Madman",
                             };
+                             
+        System.out.print("\033[H\033[2J");
         for (String e : mainMenu){
             System.out.println(e);
         }

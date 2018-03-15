@@ -82,7 +82,7 @@ class Ocean {
                 y = position.get(1);
                 newShip = new Ship(length, isHorizontal, x, y);
                 
-            } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ships, newShip));
+            } while (!isPossible(isHorizontal, x, y, length, isComputer) || !isPossibleShip(ships, newShip, isComputer));
             
             ships.add(newShip);
             this.changeReference(); 
@@ -96,9 +96,9 @@ class Ocean {
         List <Integer> position;
         for (int i = 0 ; i <= number; i++) {
             do {
-            position = view.getRandomPosition(); 
-            x = position.get(0);
-            y = position.get(1);      
+                position = view.getRandomPosition(); 
+                x = position.get(0);
+                y = position.get(1);      
             } while (!isPossibleBomb(x, y));
             Square myBomb = new Square(x, y);
             this.changeReferenceBomb();

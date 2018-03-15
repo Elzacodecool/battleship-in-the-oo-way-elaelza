@@ -65,18 +65,37 @@ class Game {
         do {
             do{
                 view.displayBoards(ocean1, ocean2, true);
-            } while(ocean2.getShot(isComputer1));
+                ocean2.score.incrementShotCount();
+                
+            } while(ocean2.getShot(isComputer1, this.level));
 
             do{
                 view.displayBoards(ocean1, ocean2, false);
-            } while(ocean1.getShot(isComputer2));
-
+                ocean1.score.incrementShotCount();
+            } while(ocean1.getShot(isComputer2, this.level));
         } while (!this.isWon());
         
     }
 
     public Boolean isWon () {
-        return false; //TODO
+        Integer counterOcean1 = 0;
+        Integer counterOcean2 = 0;
+        for (Ship ship: ocean1.ships){
+            if (ship.checkIfSunked()){
+                counterOcean1 +=1;
+            }
+        }
+        for (Ship ship: ocean2.ships){
+            if (ship.checkIfSunked()){
+                counterOcean2 +=1;
+            }
+        }
+        if (counterOcean1.equals(5) || counterOcean2.equals(5)){
+            return true;
+        } else { 
+            return false;
+        }
+        
     }
 
 

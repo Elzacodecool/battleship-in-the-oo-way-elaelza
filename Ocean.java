@@ -7,8 +7,8 @@ import java.lang.*;
 class Ocean {
     List<Ship> ships = new ArrayList<> ();
     List<Square> bombs = new ArrayList<>();
-    HighScore score;
     View view = new View();
+    HighScore score;
     Square [][] board;
     
 
@@ -136,41 +136,39 @@ class Ocean {
 
 
     
-    public Boolean getShot(Boolean isComputer) {
+    public Boolean getShot(Boolean isComputer, String level) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
         String sign;
-    
-        if (isComputer){
-            position = view.getRandomPosition();
-        }
-        else {
-            position = view.getPosition();
-        }
-        
-        x = position.get(0);
-        y = position.get(1);
-        sign = this.getSign(x, y);
-        this.board[x][y].setSign(sign);
-        this.checkSunk();
+        do{
+            if (isComputer){
+                position = view.getRandomPosition();
+            }
+            else {
+                position = view.getPosition();
+            }
             
+            x = position.get(0);
+            y = position.get(1);
+            sign = getSign(x, y);
+            board[x][y].setSign(sign);
+            this.checkSunk(level);
+            this.display();
+        } while(board[x][y].getSign().equals("x"));
         if(this.board[x][y].getSign().equals("x")){
-            return true;
-        }
-        else{
-            return false;
-        }
-
+                return true;
+            } else {
+                return false;
+            }
     }
 
 
-    private void checkSunk() {
+    private void checkSunk(String level) {
         for (Ship ship: ships){
-            if (ship.checkIfSunked()){
+            if (ship.checkIfSunked() && level.equals("1")){
                 setDotFrame(ship);
             }
-
         }
     }
 

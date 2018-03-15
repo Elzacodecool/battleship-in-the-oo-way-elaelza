@@ -19,9 +19,9 @@ class Game {
         }
         switch (mode) {
             case "1":
-                ocean1.setShips(false);
+                ocean1.setShips(true);
                 ocean1.setBombs(number);
-                ocean2.setShips(false);
+                ocean2.setShips(true);
                 ocean2.setBombs(number);
             break;
             case "2":
@@ -64,6 +64,7 @@ class Game {
 
         do {
             do{
+<<<<<<< HEAD
                 view.displayBoards(ocean1, ocean2);
                 
             } while(ocean2.getShot(isComputer1, this.level));
@@ -71,6 +72,15 @@ class Game {
             do{
                 view.displayBoards(ocean1, ocean2);
             } while(ocean1.getShot(isComputer2, this.level));
+=======
+                view.displayBoards(ocean1, ocean2, true);
+            } while(ocean2.getShot(isComputer1));
+
+            do{
+                view.displayBoards(ocean1, ocean2, false);
+            } while(ocean1.getShot(isComputer2));
+
+>>>>>>> adb9c27854ea4456563764d67bf31a4eda98df3c
         } while (!this.isWon());
         
     }

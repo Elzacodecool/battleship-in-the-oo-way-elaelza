@@ -170,6 +170,13 @@ class Ocean {
             else {
                 position = view.getIntelligentPosition(board, ships);
             }
+
+            try { 
+                Thread.sleep(600); 
+            }
+            catch ( InterruptedException e) { 
+                System.out.println("np. zostałem obudzony przedwcześnie"); 
+            } 
             
         }
         else {
@@ -180,7 +187,7 @@ class Ocean {
         y = position.get(1);
         sign = getSign(x, y);
         this.board[x][y].setSign(sign);
-        this.checkSunk(level);
+        this.checkSunk(isComputer, level);
         
         if(this.board[x][y].getSign().equals("x")){
             return true;
@@ -193,9 +200,12 @@ class Ocean {
     }
 
 
-    private void checkSunk(String level) {
+    private void checkSunk(Boolean isComputer, String level) {
         for (Ship ship: ships){
             if (ship.checkIfSunked() && level.equals("1")){
+                
+            }
+            else if (ship.checkIfSunked() &&isComputer) {
                 this.setDotFrame(ship);
             }
         }

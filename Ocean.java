@@ -93,7 +93,7 @@ class Ocean {
         Integer x;
         Integer y;
         List <Integer> position;
-        for (int i = 0 ; i < number; i++) {
+        for (int i = 0 ; i <= number; i++) {
             do {
             position = view.getRandomPosition(); 
             x = position.get(0);

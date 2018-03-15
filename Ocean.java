@@ -107,7 +107,7 @@ class Ocean {
 
 
     private Boolean isPossibleBomb(Integer x, Integer y) {
-        if (board[x][y].equals("X")) {
+        if (board[x][y].equals("x")) {
             return false;
         }
         return true;

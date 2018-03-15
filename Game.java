@@ -75,19 +75,18 @@ class Game {
         ocean1.prepareScore(isComputer1);
         ocean2.prepareScore(isComputer2);
         do {
-            do{
-                
+            do{ 
                 view.displayBoards(ocean1, ocean2, true);
-                ocean1.score.incrementShotCount();
-                
+                ocean1.score.incrementShotCount();          
             } while(ocean2.getShot(isComputer1, this.level));
 
             do{
-                
                 view.displayBoards(ocean1, ocean2, false);
                 ocean2.score.incrementShotCount();
             } while(ocean1.getShot(isComputer2, this.level));
+
         } while (!this.isWon());
+        
         view.displayBoards(ocean1, ocean2, true);
         
     }

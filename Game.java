@@ -90,6 +90,7 @@ class Game {
     public Boolean isWon () {
         Integer counterOcean1 = 0;
         Integer counterOcean2 = 0;
+        Integer shipCount = 5;
         for (Ship ship: ocean1.ships){
             if (ship.checkIfSunked()){
                 counterOcean2 +=1;
@@ -100,10 +101,10 @@ class Game {
                 counterOcean1 +=1;
             }
         }
-        if (counterOcean1.equals(4)) {
+        if (counterOcean1.equals(shipCount)) {
             ocean1.gameOver();
             return true;
-        } else if (counterOcean2.equals(4)) { 
+        } else if (counterOcean2.equals(shipCount)) { 
             ocean2.gameOver();
             return true;
         } else {

@@ -72,6 +72,7 @@ class View {
         for(String element: displayedBoard) {
             System.out.print(element);
         }
+        System.out.println("\n");        
 
     }
 

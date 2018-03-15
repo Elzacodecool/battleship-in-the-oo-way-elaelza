@@ -10,17 +10,18 @@ class View {
         String blueColor = "\033[37m";
         String blueBackground = "\033[46m";
         String redColor = "\033[31m";
-        String brownColor = "\033[30m";
+        String brownColor = "\033[33m";
         String brownBackground = "\033[40m";
         String pinkColor = "\033[35m";
+        String stopColor = "";
         String sign;
         Map <String, String> signAndColor = new HashMap <>();
         List <String> displayedBoard = new ArrayList<>();
         signAndColor.put(" ", blueBackground + " ");
         signAndColor.put(".", blueBackground + blueColor + ".");
         signAndColor.put("@", blueBackground + redColor + "@");
-        signAndColor.put("x", brownBackground + brownColor + "x" + blueBackground);
-        signAndColor.put("xv", brownBackground + brownColor + "x");
+        signAndColor.put("x", brownBackground + brownColor + stopColor + "x" + blueBackground);
+        signAndColor.put("xv", brownBackground + brownColor + stopColor + "x");
 
 
         if(isFirst) {
@@ -50,6 +51,14 @@ class View {
             displayedBoard.add(String.format("%s%s%2d%s", pinkColor, color1, y + 1, whiteColor));
             
             for (int x = 0; x < 10; x++) {
+                stopColor = "\033[0m";
+                for(Ship ship: ocean2.ships){
+                    if (ship.squares.contains(ocean2.board[x][y])) {
+                        if (ship.checkIfSunked()){
+                            stopColor = "";
+                        }
+                    }
+                }
                 sign = ocean2.board[x][y].getSign();
                 sign = (sign.equals("x") && x != 9 && ocean2.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
                 displayedBoard.add(String.format("%s%s", signAndColor.get(sign), " "));
@@ -59,6 +68,14 @@ class View {
             displayedBoard.add(String.format("%s%s%2d%s", pinkColor, color2, y + 1, whiteColor));
             
             for (int x = 0; x < 10; x++) {
+                stopColor = whiteColor;
+                for(Ship ship: ocean1.ships){
+                    if (ship.squares.contains(ocean1.board[x][y])) {
+                        if (ship.checkIfSunked()){
+                            stopColor = "";
+                        }
+                    }
+                }
                 sign = ocean1.board[x][y].getSign();
                 sign = (sign.equals("x") && x != 9 && ocean1.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
                 displayedBoard.add(String.format("%s%s", signAndColor.get(sign), " "));

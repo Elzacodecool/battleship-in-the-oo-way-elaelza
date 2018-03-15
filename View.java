@@ -6,7 +6,6 @@ class View {
         String color1 = "";
         String color2 = "";
         String whiteColor = "\033[0m";
-        String waterChar = "░";
         String greenColor = "\033[32m";
         String blueColor = "\033[37m";
         String blueBackground = "\033[46m";
@@ -43,7 +42,7 @@ class View {
             ocean1.score.name, whiteColor, ocean1.score.shotsCount, greenColor, color2, ocean2.score.name, whiteColor,
              ocean2.score.shotsCount));
         displayedBoard.add(line);
-        displayedBoard.add(String.format("\n|  %2$s%3$s%1$s|  %2$s%4$s%1$s%5$s|\n", "A B C D E F G H I J ", 
+        displayedBoard.add(String.format("\n|  %2$s%3$s%1$s%5$s|  %2$s%4$s%1$s%5$s|\n", "A B C D E F G H I J ", 
             pinkColor, color1, color2, whiteColor));     
         
         for (int y = 0; y < 10; y++) {
@@ -109,13 +108,34 @@ class View {
 
     public List<Integer> getPosition() {
         Scanner reader = new Scanner(System.in);
+        String input;
+        Integer x;
+        Integer y;
         List <Integer> position = new ArrayList<>();
-                  
-        System.out.println("X: ");
-        position.add(reader.nextInt());
-    
-        System.out.println("Y: ");
-        position.add(reader.nextInt());
+
+        do {
+            input = reader.nextLine().toUpperCase();
+
+            try{
+                x = "ABCDEFGHIJ".indexOf(input.substring(0, 1));
+                y = Integer.parseInt(input.substring(1).trim());
+            }
+            catch (NumberFormatException e) {
+                System.err.println("wrong format");
+                x = 10;
+                y = 10;
+            }
+            catch (StringIndexOutOfBoundsException e) {
+                System.err.println("enter something");
+                x = 10;
+                y = 10;
+            }
+            
+        } while(x > 9 || x < 0 || y > 10 || y <= 0);
+
+        position.add(x);
+        position.add(y - 1);
+        
 
         return position;
     }

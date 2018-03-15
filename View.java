@@ -127,7 +127,7 @@ class View {
     }
 
 
-    public List<Integer> getInteligentPosition(Square [][] board, List<Ship> ships) {
+    public List<Integer> getIntelligentPosition(Square [][] board, List<Ship> ships) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();

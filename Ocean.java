@@ -168,7 +168,7 @@ class Ocean {
                 position = view.getRandomPosition();
             }
             else {
-                position = view.getInteligentPosition(board, ships);
+                position = view.getIntelligentPosition(board, ships);
             }
             
         }

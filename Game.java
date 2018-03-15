@@ -61,17 +61,20 @@ class Game {
             default:
                 System.out.println("There's no such option");
         }
-
+        ocean1.prepareScore(isComputer1);
+        ocean2.prepareScore(isComputer2);
         do {
             do{
+                
                 view.displayBoards(ocean1, ocean2, true);
-                ocean2.score.incrementShotCount();
+                ocean1.score.incrementShotCount();
                 
             } while(ocean2.getShot(isComputer1, this.level));
 
             do{
+                
                 view.displayBoards(ocean1, ocean2, false);
-                ocean1.score.incrementShotCount();
+                ocean2.score.incrementShotCount();
             } while(ocean1.getShot(isComputer2, this.level));
         } while (!this.isWon());
         
@@ -82,21 +85,27 @@ class Game {
         Integer counterOcean2 = 0;
         for (Ship ship: ocean1.ships){
             if (ship.checkIfSunked()){
-                counterOcean1 +=1;
+                counterOcean2 +=1;
             }
         }
         for (Ship ship: ocean2.ships){
             if (ship.checkIfSunked()){
-                counterOcean2 +=1;
+                counterOcean1 +=1;
             }
         }
-        if (counterOcean1.equals(5) || counterOcean2.equals(5)){
+        if (counterOcean1.equals(5)) {
+            
             return true;
-        } else { 
+        } else if (counterOcean2.equals(5)) { 
+            
+            return true;
+        } else {
             return false;
         }
         
     }
+
+    
 
 
     public static void main (String [] args) {

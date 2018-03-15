@@ -11,8 +11,10 @@ class View {
         String blueBackground = "\033[46m";
         String redColor = "\033[31m";
         String brownColor = "\033[30m";
+        String yellowColor = "\033[33m";
         String brownBackground = "\033[40m";
         String pinkColor = "\033[35m";
+        String stopColor = "";
         String sign;
         Map <String, String> signAndColor = new HashMap <>();
         List <String> displayedBoard = new ArrayList<>();
@@ -21,6 +23,8 @@ class View {
         signAndColor.put("@", blueBackground + redColor + "@");
         signAndColor.put("x", brownBackground + brownColor + "x" + blueBackground);
         signAndColor.put("xv", brownBackground + brownColor + "x");
+        signAndColor.put("X", brownBackground + yellowColor + "x" + blueBackground);
+        signAndColor.put("XV", brownBackground + yellowColor + "x");
 
 
         if(isFirst) {
@@ -52,6 +56,14 @@ class View {
             for (int x = 0; x < 10; x++) {
                 sign = ocean2.board[x][y].getSign();
                 sign = (sign.equals("x") && x != 9 && ocean2.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
+                for(Ship ship: ocean2.ships){
+                    if (ship.squares.contains(ocean2.board[x][y])) {
+                        if (ship.checkIfSunked()){
+                            sign = sign.toUpperCase();
+                        }
+                    }
+                }
+                
                 displayedBoard.add(String.format("%s%s", signAndColor.get(sign), " "));
             }
             displayedBoard.add(whiteColor);
@@ -59,8 +71,16 @@ class View {
             displayedBoard.add(String.format("%s%s%2d%s", pinkColor, color2, y + 1, whiteColor));
             
             for (int x = 0; x < 10; x++) {
-                sign = ocean1.board[x][y].getSign();
-                sign = (sign.equals("x") && x != 9 && ocean1.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
+                sign = ocean1.board[x][y].getSign(); 
+                sign = (ocean1.board[x][y].getSign().equals("x") && x != 9 && ocean1.board[x+1][y].getSign().equals("x")) ? "xv" : sign;
+                for(Ship ship: ocean1.ships){
+                    if (ship.squares.contains(ocean1.board[x][y])) {
+                        if (ship.checkIfSunked()){
+                            sign = sign.toUpperCase();
+                        }
+                    }
+                }
+               
                 displayedBoard.add(String.format("%s%s", signAndColor.get(sign), " "));
             }
             displayedBoard.add(whiteColor);

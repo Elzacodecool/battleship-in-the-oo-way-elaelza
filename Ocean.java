@@ -96,9 +96,9 @@ class Ocean {
         List <Integer> position;
         for (int i = 0 ; i <= number; i++) {
             do {
-            position = view.getRandomPosition(); 
-            x = position.get(0);
-            y = position.get(1);      
+                position = view.getRandomPosition(); 
+                x = position.get(0);
+                y = position.get(1);      
             } while (!isPossibleBomb(x, y));
             Square myBomb = new Square(x, y);
             this.changeReferenceBomb();

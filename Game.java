@@ -85,6 +85,7 @@ class Game {
                 ocean2.score.incrementShotCount();
             } while(ocean1.getShot(isComputer2, this.level));
         } while (!this.isWon());
+        view.displayBoards(ocean1, ocean2, true);
         
     }
 
@@ -104,6 +105,7 @@ class Game {
             if (ship.checkIfSunked()){
                 counterOcean2 +=1;
             }
+            System.out.println(ship.checkIfSunked());
         }
         for (Ship ship: ocean2.ships){
             if (ship.checkIfSunked()){

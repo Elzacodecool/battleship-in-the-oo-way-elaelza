@@ -70,12 +70,13 @@ class Ocean {
         for(String name: shipsLength.keySet()){
             length = shipsLength.get(name);
             do {
-                System.out.printf("%s: %d\n", name, length);
+                
                 if (isComputer) {
                     isHorizontal = view.getRandomIsHorizontal();
                     position = view.getRandomPosition();
                 }
                 else {
+                    System.out.printf("%s: %d\n", name, length);
                     isHorizontal = view.getIsHorizontal();
                     position = view.getPosition();
                 }

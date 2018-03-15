@@ -10,7 +10,7 @@ class Game {
     Ocean ocean1 = new Ocean();
     Ocean ocean2 = new Ocean();
     View view = new View();
-    String fileName = "Score.txt";
+    String fileName = "score.txt";
 
 
     private void startGame() {
@@ -18,15 +18,16 @@ class Game {
         if (this.level.equals("3")) {
             number = Integer.parseInt(view.askUser("How many bombs would you like to set?")); 
         }
+
         switch (mode) {
             case "1":
-                ocean1.setShips(true);
+                ocean1.setShips(checkIflazy());
                 ocean1.setBombs(number);
-                ocean2.setShips(true);
+                ocean2.setShips(checkIflazy());
                 ocean2.setBombs(number);
             break;
             case "2":
-                ocean1.setShips(true);
+                ocean1.setShips(checkIflazy());
                 ocean1.setBombs(number);
                 ocean2.setShips(true);
                 ocean2.setBombs(number);
@@ -48,7 +49,7 @@ class Game {
         }
     }
 
-    private void playGame() {
+    private void playGame() throws BombException {
         Boolean isComputer1 = null;
         Boolean isComputer2 = null;
 
@@ -88,18 +89,26 @@ class Game {
         
     }
 
+    private Boolean checkIflazy() {
+        String answer = view.askUser("Would you like me to set your ships for you?(Y/N)");
+        if (answer.toUpperCase().equals("Y")) {
+            return true;
+        }
+        return false;
+    }
+
     public Boolean isWon () {
         Integer counterOcean1 = 0;
         Integer counterOcean2 = 0;
         Integer shipCount = 5;
         for (Ship ship: ocean1.ships){
             if (ship.checkIfSunked()){
-                counterOcean2 +=1;
+                counterOcean2 += 1;
             }
         }
         for (Ship ship: ocean2.ships){
             if (ship.checkIfSunked()){
-                counterOcean1 +=1;
+                counterOcean1 += 1;
             }
         }
         if (counterOcean1.equals(shipCount)) {
@@ -147,7 +156,12 @@ class Game {
             view.printSubmenu();
             myGame.level = view.askUser("How would you like to play??");
             myGame.startGame();
+            try {
             myGame.playGame();
+            } catch (BombException e) {
+                view.displayBoards(myGame.ocean1, myGame.ocean2, true);
+                System.out.println("You have found bomb. Game Over.\n");
+            }
         } while (isPlaying);
 
     }

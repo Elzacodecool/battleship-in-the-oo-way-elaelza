@@ -83,10 +83,11 @@ class View {
 
 
     public void printMenu() {
-        String [] mainMenu = { "1. Player - Player",
-                            "2. Player - Computer", 
-                            "3. Computer - Computer",
-                            "4. Quit",
+        String [] mainMenu = { "1. Play Player - Player",
+                            "2. Play Player - Computer", 
+                            "3. Play Computer - Computer",
+                            "4. Print HighScore",
+                            "5. Quit"
                             };
         for (String e : mainMenu){
             System.out.println(e);

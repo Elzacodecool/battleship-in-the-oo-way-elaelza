@@ -96,7 +96,6 @@ class Game {
             if (ship.checkIfSunked()){
                 counterOcean2 +=1;
             }
-            System.out.println(ship.checkIfSunked());
         }
         for (Ship ship: ocean2.ships){
             if (ship.checkIfSunked()){

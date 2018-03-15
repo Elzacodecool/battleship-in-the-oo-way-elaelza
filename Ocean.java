@@ -12,7 +12,6 @@ class Ocean {
     Square [][] board;
     
 
-
     public Ocean () {
         this.board = setBoard();
         this.score = new HighScore();
@@ -25,7 +24,6 @@ class Ocean {
         this.score.setName(view.askUser("What's your name?"));
         }
     }
-
 
     private Square [][] setBoard(){
         Square [][] board = new Square[10][10];
@@ -51,11 +49,13 @@ class Ocean {
         }
     }
 
+
     private void changeReferenceBomb() {
         for (Square position: bombs){
             board[position.x][position.y] = position;
         }
     }
+
 
     public void setShips(Boolean isComputer) {
         Boolean isHorizontal;
@@ -65,7 +65,6 @@ class Ocean {
         Integer y;
         Ship newShip;
         Map <String, Integer> shipsLength = Ship.getShipsLength();
-        
         
 
         for(String name: shipsLength.keySet()){
@@ -82,12 +81,13 @@ class Ocean {
                 x = position.get(0);
                 y = position.get(1);
                 newShip = new Ship(length, isHorizontal, x, y);
-                changeReference(); 
+                this.changeReference(); 
             } while (!isPossible(isHorizontal, x, y, length) || !isPossibleShip(ships, newShip));
             
             ships.add(newShip);
         }  
     }
+
 
     public void setBombs(int number){
         Integer x;
@@ -100,10 +100,11 @@ class Ocean {
             y = position.get(1);      
             } while (!isPossibleBomb(x, y));
             Square myBomb = new Square(x, y);
-            changeReferenceBomb();
-            bombs.add(myBomb);
+            this.changeReferenceBomb();
+            this.bombs.add(myBomb);
         }
     }
+
 
     private Boolean isPossibleBomb(Integer x, Integer y) {
         if (board[x][y].equals("X")) {
@@ -111,6 +112,7 @@ class Ocean {
         }
         return true;
     }
+
 
     private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
         if (isHorizontal) {
@@ -145,40 +147,38 @@ class Ocean {
         return true;
     }
 
-
     
     public Boolean getShot(Boolean isComputer, String level) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
         String sign;
-        do{
-            if (isComputer){
-                position = view.getRandomPosition();
-            }
-            else {
-                position = view.getPosition();
-            }
-            
-            x = position.get(0);
-            y = position.get(1);
-            sign = getSign(x, y);
-            board[x][y].setSign(sign);
-            this.checkSunk(level);
-            this.display();
-        } while(board[x][y].getSign().equals("x"));
+        
+        if (isComputer){
+            position = view.getRandomPosition();
+        }
+        else {
+            position = view.getPosition();
+        }
+        
+        x = position.get(0);
+        y = position.get(1);
+        sign = getSign(x, y);
+        this.board[x][y].setSign(sign);
+        this.checkSunk(level);
+        
         if(this.board[x][y].getSign().equals("x")){
-                return true;
-            } else {
-                return false;
-            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
     private void checkSunk(String level) {
         for (Ship ship: ships){
             if (ship.checkIfSunked() && level.equals("1")){
-                setDotFrame(ship);
+                this.setDotFrame(ship);
             }
         }
     }
@@ -198,34 +198,14 @@ class Ocean {
         return ".";
     }
 
-    public void addShipsToBoard(){
-        for(Ship myShip: ships){
-            for (Square square: myShip.squares) {
-                board[square.x][square.y].setSign("x");
-            }
-        } 
-    }
-
-
-    public void display() {
-        System.out.print("  x 0 1 2 3 4 5 6 7 8 9\ny  ____________________\n");
-        for (int y = 0; y < 10; y++) {
-            System.out.printf("%d |", y);
-            for (int x = 0; x < 10; x++) {
-                System.out.printf(" %s", board[x][y].getSign());
-            }
-            System.out.print("\n");
-        }
-    }
-
 
     private void setDotFrame(Ship ship) {
         for(Square position: ship.squares) {
             for (int i = -1; i <= 1; i++) {
                 for(int j = -1; j <= 1; j++){
                     try {
-                        if(!board[position.x + i][position.y + j].getSign().equals("x")) {
-                            board[position.x + i][position.y + j].setSign(".");
+                        if(!this.board[position.x + i][position.y + j].getSign().equals("x")) {
+                            this.board[position.x + i][position.y + j].setSign(".");
                         }
                     }
                     catch (ArrayIndexOutOfBoundsException e) {}

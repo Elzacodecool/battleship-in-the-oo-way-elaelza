@@ -170,13 +170,7 @@ class Ocean {
             else {
                 position = view.getIntelligentPosition(board, ships);
             }
-
-            try { 
-                Thread.sleep(600); 
-            }
-            catch ( InterruptedException e) { 
-                System.out.println("np. zostałem obudzony przedwcześnie"); 
-            } 
+            this.timeStop();
             
         }
         else {
@@ -188,6 +182,7 @@ class Ocean {
         sign = getSign(x, y);
         this.board[x][y].setSign(sign);
         this.checkSunk(isComputer, level);
+        this.enterDotInside(isComputer, level);
         
         if(this.board[x][y].getSign().equals("x")){
             return true;
@@ -200,12 +195,64 @@ class Ocean {
     }
 
 
+    private void timeStop() {
+        try { 
+            Thread.sleep(600); 
+        }
+        catch ( InterruptedException e) { 
+            System.out.println(e); 
+        }
+    }
+
+
+    private void enterDotInside(Boolean isComputer, String level) {
+        Integer count;
+        if (level.equals("1") || isComputer){
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    count = 0;
+                    
+                    try {
+                        if (board[x+1][y].getSign().equals(".")) {
+                            count++;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        count++;
+                    }
+                    try {
+                        if (board[x-1][y].getSign().equals(".")) {
+                            count++;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        count++;
+                    }
+                    try {
+                        if (board[x][y+1].getSign().equals(".")) {
+                            count++;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        count++;
+                    }
+                    try {
+                        if (board[x][y-1].getSign().equals(".")) {
+                            count++;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        count++;
+                    }
+                    if (board[x][y].getSign().equals(" ") && count.equals(4)){
+                        board[x][y].setSign(".");
+                    }               
+                }
+            }
+        }
+    }
+
+
+
     private void checkSunk(Boolean isComputer, String level) {
         for (Ship ship: ships){
-            if (ship.checkIfSunked() && level.equals("1")){
-                
-            }
-            else if (ship.checkIfSunked() &&isComputer) {
+            if (ship.checkIfSunked() && (level.equals("1") || isComputer)){
                 this.setDotFrame(ship);
             }
         }

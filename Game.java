@@ -100,7 +100,7 @@ class Game {
         return false;
     }
 
-    public Boolean isWon () {
+    public Boolean isWon() {
         Integer counterOcean1 = 0;
         Integer counterOcean2 = 0;
         Integer shipCount = 5;

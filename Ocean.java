@@ -169,7 +169,6 @@ class Ocean {
             if (ship.checkIfSunked() && level.equals("1")){
                 setDotFrame(ship);
             }
-
         }
     }
 

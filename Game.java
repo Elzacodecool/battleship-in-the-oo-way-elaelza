@@ -65,11 +65,13 @@ class Game {
         do {
             do{
                 view.displayBoards(ocean1, ocean2, true);
+                ocean2.score.incrementShotCount();
                 
             } while(ocean2.getShot(isComputer1, this.level));
 
             do{
                 view.displayBoards(ocean1, ocean2, false);
+                ocean1.score.incrementShotCount();
             } while(ocean1.getShot(isComputer2, this.level));
         } while (!this.isWon());
         
@@ -88,7 +90,7 @@ class Game {
                 counterOcean2 +=1;
             }
         }
-        if (counterOcean1.equals(4) || counterOcean2.equals(4)){
+        if (counterOcean1.equals(5) || counterOcean2.equals(5)){
             return true;
         } else { 
             return false;

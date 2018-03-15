@@ -93,11 +93,11 @@ class Game {
                 counterOcean1 +=1;
             }
         }
-        if (counterOcean1.equals(5)) {
-            
+        if (counterOcean1.equals(4)) {
+            ocean1.gameOver();
             return true;
-        } else if (counterOcean2.equals(5)) { 
-            
+        } else if (counterOcean2.equals(4)) { 
+            ocean2.gameOver();
             return true;
         } else {
             return false;
@@ -110,10 +110,10 @@ class Game {
 
     public static void main (String [] args) {
         Game myGame = new Game();
-        View view = new View();
-
         String mode;
         do {
+            myGame = new Game();
+            View view = new View();
             view.printMenu();
             myGame.mode = view.askUser("How would you like to play??");
             view.printSubmenu();

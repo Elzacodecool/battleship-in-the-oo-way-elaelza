@@ -15,7 +15,6 @@ class Ocean {
     public Ocean () {
         this.board = setBoard();
         this.score = new HighScore();
-        //highscore bez parametru
     }
 
     public void prepareScore(Boolean isComputer){
@@ -37,6 +36,10 @@ class Ocean {
         return board;
     }
 
+    public void gameOver() {
+        System.out.println("Game Over");
+        this.score.writeToFile();
+    }
 
     private void changeReference() {
         for (Ship ship: ships){
@@ -91,7 +94,7 @@ class Ocean {
         Integer x;
         Integer y;
         List <Integer> position;
-        for (int i = 0 ; i < number; i++) {
+        for (int i = 0 ; i <= number; i++) {
             do {
             position = view.getRandomPosition(); 
             x = position.get(0);
@@ -105,14 +108,14 @@ class Ocean {
 
 
     private Boolean isPossibleBomb(Integer x, Integer y) {
-        if (board[x][y].equals("X")) {
+        if (board[x][y].equals("x")) {
             return false;
         }
         return true;
     }
 
 
-    private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length){
+    private Boolean isPossible(Boolean isHorizontal, Integer x, Integer y, Integer length, Boolean isComputer){
         if (isHorizontal) {
             if (x + length < 10 && y < 10){
                 return true;
@@ -122,19 +125,23 @@ class Ocean {
                 return true;
             }
         }
-        System.out.println("Board is too small for this ship.");
+        if (!isComputer) {
+            System.out.println("Board is too small for this ship.");
+        }
         return false;
     }
 
 
-    private Boolean isPossibleShip(List <Ship> ships, Ship newShip) {
+    private Boolean isPossibleShip(List <Ship> ships, Ship newShip, Boolean isComputer) {
         for (Ship ship: ships) {
             for (Square position: ship.squares) {
                 for (Square newPosition: newShip.squares){
                     for (int i = -1; i <= 1; i++) {
                         for (int j = -1; j <= 1; j++) {
                             if (newPosition.x + i == position.x && newPosition.y + j == position.y) {
-                                System.out.println("There's no space for this ship.");
+                                if (!isComputer) {
+                                    System.out.println("There's no space for this ship.");
+                                }
                                 return false;
                             }
                         }

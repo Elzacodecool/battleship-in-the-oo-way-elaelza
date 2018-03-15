@@ -35,6 +35,7 @@ class Game {
                 player2 = true;
             break;
             case "4":
+                System.out.print("\033[H\033[2J");
                 String [] highScore = readArray(fileName);
                 for (String element : highScore) {
                     System.out.println(element);
@@ -140,11 +141,11 @@ class Game {
     }
 
     public static void main (String [] args) {
-        Game myGame = new Game();
-        Boolean isPlaying = true;
-        do {
+        Game myGame;
+        View view = new View();
+
+        while(true) {
             myGame = new Game();
-            View view = new View();
             view.printMenu();
             myGame.mode = view.askUser("What would you like to do?");
             if (myGame.mode.equals("4")) {
@@ -164,7 +165,10 @@ class Game {
                 view.displayBoards(myGame.ocean1, myGame.ocean2, true);
                 System.out.println("You have found bomb. Game Over.\n");
             }
-        } while (isPlaying);
+            catch (NullPointerException e){
+                System.out.println("Choose again.");
+            }
+        } 
 
     }
 }

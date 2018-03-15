@@ -110,6 +110,7 @@ class View {
                             "4. Print HighScore",
                             "5. Quit"
                             };
+        
         for (String e : mainMenu){
             System.out.println(e);
         }
@@ -121,13 +122,15 @@ class View {
                             "2. Advanced", 
                             "3. Madman",
                             };
+                             
+        System.out.print("\033[H\033[2J");
         for (String e : mainMenu){
             System.out.println(e);
         }
     }
 
 
-    public List<Integer> getInteligentPosition(Square [][] board, List<Ship> ships) {
+    public List<Integer> getIntelligentPosition(Square [][] board, List<Ship> ships) {
         Integer x;
         Integer y;
         List <Integer> position = new ArrayList<>();
@@ -146,34 +149,74 @@ class View {
 
     private List <Integer> getNextPosition(Square[][] board, List<Ship> ships) {
         Random random = new Random();
-        Integer x;
-        Integer y;
+        Integer x1;
+        Integer y1;
+        Integer x2;
+        Integer y2;
         Integer shift;
-        Boolean checkHorizontal;
+        Boolean isHorizontal;
         List <Integer> position = new ArrayList<>();
         for(Ship ship: ships){
             for(Square pos: ship.squares){
                 if(pos.getSign().equals("x") && !ship.checkIfSunked()){  
-                    checkHorizontal = random.nextBoolean();
-                    shift = (random.nextBoolean()) ? 1 : -1;
-                    if (checkHorizontal) {
-                        x = pos.x + shift;
-                        y = pos.y;
-                    }
-                    else {
-                        x = pos.x;
-                        y = pos.y + shift;
-                    }
-                    if (isPossiblePossition(x, y) && !board[x][y].getSign().equals("x")){
-                        position.add(x);
-                        position.add(y);
+                    do {
+                        if (checkIsHorizontalKnown(board, ship.squares)) {
+                            isHorizontal = ship.isHorizontal;
+                        }
+                        else {
+                            isHorizontal = random.nextBoolean();
+                        }
+                        
+                        shift = (random.nextBoolean()) ? 1 : -1;
+                        if (isHorizontal) {
+                            x1 = pos.x + shift;
+                            y1 = pos.y;
+                            x2 = pos.x - shift;
+                            y2 = pos.y;
+                        }
+                        else {
+                            x1 = pos.x;
+                            y1 = pos.y + shift;
+                            x2 = pos.x;
+                            y2 = pos.y - shift;
+                        }
+                    } while (!isPossiblePossition(x1, y1));
 
-                        return position;
+                    if (!isPossiblePossition(x2, y2)) {
+                        if (!board[x1][y1].getSign().equals(" ")){
+                            continue;
+                        }
                     }
+                    else{
+                        if (!(board[x1][y1].getSign().equals(" ") || board[x2][y2].getSign().equals(" ")) && checkIsHorizontalKnown(board, ship.squares)){
+                            continue;
+                        }
+                    }
+                    
+                    position.add(x1);
+                    position.add(y1);
+                    return position;
+                    
                 }
             }
         }
         return getRandomPosition();
+    }
+
+
+    private Boolean checkIsHorizontalKnown(Square[][] board, List<Square> squares){
+        Integer countHit = 0;
+        for(Square position: squares) {
+            if (position.getSign().equals("x")) {
+                countHit ++;
+            }
+        }
+        if(countHit.compareTo(1) > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private Boolean isPossiblePossition (Integer x, Integer y) {

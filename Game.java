@@ -64,12 +64,12 @@ class Game {
 
         do {
             do{
-                view.displayBoards(ocean1, ocean2);
+                view.displayBoards(ocean1, ocean2, true);
                 
             } while(ocean2.getShot(isComputer1, this.level));
 
             do{
-                view.displayBoards(ocean1, ocean2);
+                view.displayBoards(ocean1, ocean2, false);
             } while(ocean1.getShot(isComputer2, this.level));
         } while (!this.isWon());
         

@@ -18,25 +18,21 @@ class Game {
         if (this.level.equals("3")) {
             number = Integer.parseInt(view.askUser("How many bombs would you like to set?")); 
         }
+        Boolean player1 = null;
+        Boolean player2 = null;
 
         switch (mode) {
             case "1":
-                ocean1.setShips(checkIflazy());
-                ocean1.setBombs(number);
-                ocean2.setShips(checkIflazy());
-                ocean2.setBombs(number);
+                player1 = checkIflazy();
+                player2 = checkIflazy();
             break;
             case "2":
-                ocean1.setShips(checkIflazy());
-                ocean1.setBombs(number);
-                ocean2.setShips(true);
-                ocean2.setBombs(number);
+                player1 = checkIflazy();
+                player2 = true;
             break;
             case "3":
-                ocean1.setShips(true);
-                ocean1.setBombs(number);
-                ocean2.setShips(true);
-                ocean2.setBombs(number);
+                player1 = true;
+                player2 = true;
             break;
             case "4":
                 String [] highScore = readArray(fileName);
@@ -47,6 +43,13 @@ class Game {
             default:
                 System.out.println("There's no such option");
         }
+        if (this.mode.equals("1") || this.mode.equals("2") || this.mode.equals("3")) {
+            ocean1.setShips(player1);
+            ocean1.setBombs(number);
+            ocean2.setShips(player2);
+            ocean2.setBombs(number);
+        }
+        
     }
 
     private void playGame() throws BombException {

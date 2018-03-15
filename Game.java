@@ -142,11 +142,11 @@ class Game {
     }
 
     public static void main (String [] args) {
-        Game myGame = new Game();
-        Boolean isPlaying = true;
-        do {
+        Game myGame;
+        View view = new View();
+
+        while(true) {
             myGame = new Game();
-            View view = new View();
             view.printMenu();
             myGame.mode = view.askUser("What would you like to do?");
             if (myGame.mode.equals("4")) {
@@ -166,7 +166,10 @@ class Game {
                 view.displayBoards(myGame.ocean1, myGame.ocean2, true);
                 System.out.println("You have found bomb. Game Over.\n");
             }
-        } while (isPlaying);
+            catch (NullPointerException e){
+                System.out.println("Choose again.");
+            }
+        } 
 
     }
 }

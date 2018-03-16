@@ -1,5 +1,5 @@
 # Class HighScore
-
+*Gather and save scores to file.*
 
 ## _Fields:_
 - **name**

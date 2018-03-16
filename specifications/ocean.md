@@ -1,5 +1,5 @@
 # Class Ocean
-
+*Contains fields and methods to provide two separate Oceans and score for players.*
 
 ## _Fields:_
 - **ships**

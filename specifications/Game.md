@@ -1,4 +1,6 @@
 # Class Game
+*Provides basic components to handle whole game.*
+
 
 ## _Fields:_
 - **mode**

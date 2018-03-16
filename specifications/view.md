@@ -1,4 +1,5 @@
 # Class View
+*Takes input from players and display data.*
 
 ## _Fields:_
 `null`

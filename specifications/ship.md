@@ -1,5 +1,5 @@
 # Class Ship
-
+*Provides fields and method necessary to handle ships.*
 
 ## _Fields:_
 - **length**
